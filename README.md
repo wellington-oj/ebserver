@@ -3,7 +3,8 @@
 example on how to use it (on JavaScript):
 
  //Starting the execution by sending "what_now" to the server.	
- ionViewDidEnter() {
+```
+ionViewDidEnter() {
     this.startExecution();
   }
 
@@ -50,4 +51,4 @@ example on how to use it (on JavaScript):
   
   
   }
-  
+```
