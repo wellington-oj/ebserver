@@ -1,11 +1,11 @@
 # dashboard
 
-example on how to use it (on JavaScript):
 The Android app it's a very simple example of how to use the dashboard.
 
 Remeber to change the ip address (to the server ip) and port in MainActivity and to add the server ip to network_security_config at res/xml. 
 
 
+another example on how to use it (on JavaScript):
  //Starting the execution by sending "what_now" to the server.	
 ```
 ionViewDidEnter() {
