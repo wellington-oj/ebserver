@@ -2,15 +2,25 @@ const express = require("express")
 const cors = require('cors');
 const session = require("./session")
 const adb = require("./adbCommands")
-// const fs = require('fs')
-// const https = require('https')
+const test = require("./testModule")
+//const fs = require('fs')
+//const https = require('https')
 
-// const key = fs.readFileSync('./key.pem')
-// const cert = fs.readFileSync('./cert.pem')
+//var options = {
+//    key: fs.readFileSync('../key.pem'),
+//    cert: fs.readFileSync('../cert.pem')
+//};
+
 
 const app = express()
+
 app.use(cors())
-// const server = https.createServer({key: key, cert: cert }, app)
+
+//https.createServer(app).listen(3001);
+//https.createServer(options, app).listen(3002);
+
+
+//const server = https.createServer({key: key, cert: cert }, app)
 
 
 app.get("/", (req, res) => {
@@ -69,7 +79,33 @@ app.get("/done", async (req, res) => {
 
 
 app.listen(3000, () => {
-    console.log("Dashboard app listening on port " + 3000 + "!");
+    if(process.argv.length <= 2) console.log("Dashboard app listening on port " + 3000 + "!");
 });
+
+readInput();
+
+
+async function readInput() {
+    if(process.argv.length > 2){
+        test.runTests(process.argv);
+    }
+}
+/*process.argv.forEach(function (val, index, array) {
+  if (index === 2 && val === '-t'){
+    myPort = val;
+    console.log("ae");
+  }
+  if (index === 3) {
+    targetDeviceIP = val;
+    console.log("Target device ip set to: " + targetDeviceIP);
+  }
+  if (index === 4) {
+    myIpAddress = val;
+    console.log("As informed by the user, my ip address is: " + myIpAddress);
+  }
+});    
+}*/
+
+
 
 

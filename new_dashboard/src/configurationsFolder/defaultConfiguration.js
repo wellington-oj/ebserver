@@ -20,10 +20,18 @@ const imagesRotationConfig = {
     }
 }
 
+const espressoConfig = {
+    benchs: ["espresso"],
+    parameters: {
+        "espresso": ["test1", "test2", "test3", "test4"]
+    }
+}
+
 module.exports = {
     "key": "default",
     "benchmarks": {
         "benchmarkGame": benchGameAllConfig,
+        "espressoTest": espressoConfig,
         "imageRotation": imagesRotationConfig
     },
     "start_execution": 1,
