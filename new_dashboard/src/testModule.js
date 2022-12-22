@@ -27,8 +27,8 @@ async function runTests(args){
                 )    
             i++;
         }
-    }
-    
+        done()
+    }  
 }
 
 
