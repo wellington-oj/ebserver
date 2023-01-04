@@ -50,7 +50,6 @@ app.get("/logdata", async (req, res) => {
     await adb.outputBatteryStatsTo(
         ip,
         req.headers.framework,
-        req.headers.device,
         execution,
         execution_number,
         req.headers.application_id

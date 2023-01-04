@@ -39,9 +39,8 @@ async function outputMemInfo(targetDevice="", packageName="", dir, fileName) {
         if(targetDevice === ""){
             await exec(`adb shell dumpsys meminfo ${packageName}.test -d > "${dir + "/memory-" + fileName}"`)
         }else{
-         console.log(`adb shell dumpsys meminfo ${packageName} -d > "${dir + "/memory-" + fileName}"`)
-          //  const pid = await exec(`adb -s ${targetDevice} shell pidof ${device_id}`)
-          //  await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${pid.stdout.trim()} -d > "${dir + "/memory-" + fileName}"`)
+            const pid = await exec(`adb -s ${targetDevice} shell pidof ${packageName}`)
+            await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${pid.stdout.trim()} -d > "${dir + "/memory-" + fileName}"`)
         }
         
     } catch (error) {

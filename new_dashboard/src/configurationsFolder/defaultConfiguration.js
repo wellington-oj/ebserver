@@ -1,6 +1,7 @@
 const benchGameAllConfig = {
-    benchs: ["fannkuch", "knucleotide", "nbody", "pidigits", "regex", "revcomp", "spectral", "fasta", "binarytree"],
+    benchs: ["mandelbrot", "fannkuch", "knucleotide", "nbody", "pidigits", "regex", "revcomp", "spectral", "fasta", "binarytree"],
     parameters: {
+        "mandelbrot": [16000],
         "binarytree": [21, 22, 23],
         "fannkuch": [11, 12],
         "fasta": [17500000, 35000000, 52500000, 78750000, 120000000, 180000000, 270000000],
