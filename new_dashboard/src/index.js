@@ -2,15 +2,9 @@ const express = require("express")
 const cors = require('cors');
 const session = require("./session")
 const adb = require("./adbCommands")
-// const fs = require('fs')
-// const https = require('https')
-
-// const key = fs.readFileSync('./key.pem')
-// const cert = fs.readFileSync('./cert.pem')
 
 const app = express()
 app.use(cors())
-// const server = https.createServer({key: key, cert: cert }, app)
 
 
 app.get("/", (req, res) => {
