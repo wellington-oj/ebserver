@@ -1,0 +1,7 @@
+{
+  "name": "ReactNative",
+  "displayName": "ReactNative",
+  "android": {
+    "package": "com.react.example.starter"
+  }
+}
