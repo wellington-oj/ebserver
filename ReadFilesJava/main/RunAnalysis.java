@@ -1,16 +1,13 @@
 package main;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import enums.FileType;
+import enums.Metrics;
 import enums.interfaces.AppName;
 import enums.interfaces.InputData;
-import enums.interfaces.Modes;
+import readfiles.ReadDataFiles;
 import readfiles.ReadFiles;
 import readfiles.ReadMemoryFiles;
 import utils.FileTools;
@@ -23,79 +20,53 @@ public class RunAnalysis {
 
     private AppData appData;
 
-    private Map<AppName, List<InputData>> allValidBenchmarks = new HashMap<>();
-    private List<Modes> modes;
-    private File allDataFile;
-
-    public RunAnalysis(AppData appData, List<Modes> modes){
+    public RunAnalysis(AppData appData){
         
         this.appData = appData;
-        this.modes = modes;
-        this.allDataFile = FileTools.getDumpFile(appData.prefix());
 
         System.out.println();
         System.out.println("<< Reading " + appData.prefix() + " >>");
     }
 
-    public void runCreateRFiles(boolean classic, List<String> benchmarks, boolean graphInfo, int nColumns){
-        executeReading(appData.apps(), appData.benchs(), modes);
-        FileTools.createBoxPlotFile(appData.benchs(),appData.prefix(),allValidBenchmarks, modes);
-        FileTools.createGGPLOT(appData.prefix(), classic, benchmarks, graphInfo, nColumns, modes);  
-    }
-
     public void run(){
-        executeReading(appData.apps(), appData.benchs(), modes);
+        executeReading(appData.apps(), appData.benchs());
     }
 
-    private InputData[] validBenchmarks(InputData[] benchmarks, AppName framework) {
-
-        List<InputData> validBenchmarks = new ArrayList<InputData>();
-        StringBuilder errorLog = new StringBuilder();
-
-        for (InputData bench : benchmarks) {
-            String lastFile = FileTools.getFilePath(FileType.ENERGY, pathToFiles, 
-                                                    framework, device, bench,numberOfFiles);
-            File file = new File(lastFile);
-            if(file.exists())
-                validBenchmarks.add(bench);
-            else
-                errorLog.append(
-                    String.format("last file (%d) not found for %s - %s \n", 
-                                numberOfFiles, bench, bench.getWorkload())
-                );
-        }
-        System.out.print(errorLog);
-        return validBenchmarks.toArray(InputData[]::new);
-    }
-
-    private void executeReading(AppName[] appNames, InputData[] benchs, List<Modes> modes) {
+    private void executeReading(AppName[] appNames, InputData[] benchs) {
         for (AppName framework : appNames)
-            readFiles(benchs, framework, modes);
+            readFiles(benchs, framework);
     }
 
-    private void readFiles(InputData[] benchmarks, AppName framework, List<Modes> modes) {
+    private void readFiles(InputData[] benchmarks, AppName framework) {
 
         System.out.println("\n    <<< Starting " + framework + " >>>> \n");
 
-        StringBuilder allData = new StringBuilder();
-
-        InputData[] validBenchmarks = validBenchmarks(benchmarks, framework);
-        allValidBenchmarks.put(framework,Arrays.asList(benchmarks));
-
         try{
-            Map<Modes, String> mapData = new ReadFiles(pathToFiles, framework, numberOfFiles, device).readAll(validBenchmarks);
-            Map<Modes, String> mapMemory = new ReadMemoryFiles(pathToFiles, framework, numberOfFiles, device).readAll(validBenchmarks);
-            mapData.putAll(mapMemory);
-            
-            for (Modes mode : modes){
-                FileTools.dataToFile(benchmarks, appData.prefix(), device, framework, mode, mapData);
-                allData.append(mapData.get(mode)); 
+            for (InputData inputData : benchmarks) {
+                List<Metrics> metrics = new ArrayList<>();
+                Map<Integer, Map<Metrics, Double>> mainMap = new ReadFiles(pathToFiles, framework, numberOfFiles, device).readSingle(inputData);
+                Map<Integer, Map<Metrics, Double>> mapMemory = new ReadMemoryFiles(pathToFiles, framework, numberOfFiles, device).readSingle(inputData);
+                Map<Integer, Map<Metrics, Double>> mapData = new ReadDataFiles(pathToFiles, framework, numberOfFiles, device).readSingle(inputData);
+                
+                mergeMaps(mainMap, mapMemory);
+                mergeMaps(mainMap, mapData);
+                
+                metrics.addAll(List.of(ReadFiles.metrics()));
+                metrics.addAll(List.of(ReadMemoryFiles.metrics()));
+                metrics.addAll(List.of(ReadDataFiles.metrics()));
+
+                FileTools.outputCSV(device, metrics, inputData, framework, mainMap);
+                
             }
-
-            FileTools.printData(allData, allDataFile); 
-
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void mergeMaps(Map<Integer, Map<Metrics, Double>> mapData, Map<Integer, Map<Metrics, Double>> mapMemory){
+        for (Integer key : mapData.keySet()) {
+            Map<Metrics, Double> map = mapData.get(key);
+            map.putAll(mapMemory.get(key));
         }
     }
 }

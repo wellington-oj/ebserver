@@ -3,35 +3,35 @@ package readfiles;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import enums.interfaces.InputData;
 import enums.FileType;
+import enums.Metrics;
 import enums.interfaces.AppName;
-import enums.interfaces.Modes;
 import utils.FileTools;
-import utils.RTools;
 import utils.ConversionTools;
 
 public class ReadFiles {
 
-    private enum ModeEnum implements Modes{
-        ENERGY("ee"),
-        FOREGROUND_TIME("ef"),
-        CPU_TIME("ec");
+    private enum MetricsEnergy implements Metrics{
+        ENERGY("energy"),
+        FOREGROUND_TIME("exec_time"),
+        CPU_TIME("cpu_time");
     
         private final String shortVersion;
-        ModeEnum(String shortVersion){
+        MetricsEnergy(String shortVersion){
             this.shortVersion = shortVersion;
         }
-        public String getShortVersion(){
+        public String shortVersion(){
             return shortVersion;
         }
+    }
+
+    public static Metrics[] metrics(){
+        return MetricsEnergy.values();
     }
 
     private record TimeData(double foregroundTime, double cpuTime){}
@@ -42,13 +42,8 @@ public class ReadFiles {
     private AppName framework;
     private int numberOfFiles;
 
-    private int countReplace;
-    private String errorLog = "";
-
-    private Map<Modes, String> map = new HashMap<>();
-    private List<Double> consumption = new ArrayList<>();
-    private List<Double> timeForeground = new ArrayList<>();
-    private List<Double> timeCPU = new ArrayList<>();
+    private Map<Integer, Map<Metrics, Double>> map = new HashMap<>();
+    private Map<Metrics, Double> mapMetrics;
 
     public ReadFiles(String path, AppName framework, int numberOfFiles, String device) {
         this.path = path;
@@ -57,57 +52,23 @@ public class ReadFiles {
         this.device = device;
     }
 
-    public static List<? extends Modes> modes(){
-        return List.of(ModeEnum.values());
-    }
-
-    public Map<Modes, String> readAll(InputData[] benchmarkSet) {
-        Arrays.asList(benchmarkSet).forEach(benchmark -> readSingle(benchmark));
-        if(!errorLog.equals(""))
-            System.out.println(errorLog);
-
-        return map;
-    }
-
-    public void readSingle(InputData benchmark) {
+    public Map<Integer, Map<Metrics, Double>> readSingle(InputData benchmark) {
         int i = 1;
-        if (numberOfFiles > 30) {
-            i = numberOfFiles-30;
-            countReplace = i;
-        }
         try {
             for (; i < numberOfFiles + 1; i++){
+                mapMetrics = new HashMap<>();
                 executeReadFile(i, benchmark);
+                map.put(i, mapMetrics);
             }
-
-            mergeData(benchmark);
-            clearData();
 
         } catch (InvalidParameterException e) {
             e.printStackTrace();
         }
         catch (FileNotFoundException e) {
-            errorLog += "file (" +i+ ") not found for " +  benchmark + 
-                        "-" + benchmark.getWorkload() + " (probably timeout) \n";
+            System.out.println("file (" +i+ ") not found for " +  benchmark + 
+                        "-" + benchmark.getWorkload());
         }
-    }
-
-    private void clearData() {
-        timeForeground.clear();
-        timeCPU.clear();
-        consumption.clear();
-    }
-
-    private void mergeData(InputData benchmark) {
-        map.merge(ModeEnum.FOREGROUND_TIME,
-                RTools.putInRFormat(ModeEnum.FOREGROUND_TIME,benchmark, framework, timeForeground), 
-                (x,y) -> x+y);
-        map.merge(ModeEnum.CPU_TIME,
-                RTools.putInRFormat(ModeEnum.CPU_TIME,benchmark, framework, timeCPU), 
-                (x,y) -> x+y);
-        map.merge(ModeEnum.ENERGY,
-                RTools.putInRFormat(ModeEnum.ENERGY,benchmark, framework, consumption), 
-                (x,y) -> x+y);
+        return map;
     }
 
     private void executeReadFile(int fileNumber, InputData benchmark) throws FileNotFoundException {
@@ -123,42 +84,20 @@ public class ReadFiles {
                     framework.setAppID(findAppId(scnr)); 
                     searchState = nextState(searchState);
 
-                    consumption.add(findEnergyData(voltage, scnr));
+                    mapMetrics.put(MetricsEnergy.ENERGY,findEnergyData(voltage, scnr));
                     searchState = nextState(searchState);
 
                     TimeData timeData = findTimeData(scnr);
-                    timeForeground.add(timeData.foregroundTime());
-                    timeCPU.add(timeData.cpuTime());
+                    mapMetrics.put(MetricsEnergy.FOREGROUND_TIME,timeData.foregroundTime());
+                    mapMetrics.put(MetricsEnergy.CPU_TIME,timeData.cpuTime());
 
                     searchState = nextState(searchState);
                 }
-            } catch (IllegalArgumentException e) {
-                countReplace = findFileReplacement(fileNumber, benchmark, searchState);
-                if(countReplace > 0)
-                    executeReadFile(countReplace,benchmark);
-                else
-                    System.out.println("<< ERROR: can't replace because there are no more files >>");
-            }
+            } 
         }
 
     private SearchState nextState(SearchState searchState) {
         return SearchState.values()[searchState.ordinal()+1];
-    }
-
-    private int findFileReplacement(int fileNumber, InputData benchmark, SearchState searchState) {
-        --countReplace;
-        //if(countReplace > 0){
-            System.out.println(
-                String.format(
-                "\n << ERROR: file %d of benchmark %s %s stopped at %s. Replacing it with file: %d >> \n", 
-                fileNumber,
-                benchmark.toString(),
-                framework.getAppName(),
-                searchState.name(),
-                countReplace)
-            );
-        //}
-        return countReplace;
     }
 
     private File getFile(int fileNumber, InputData benchmark) {

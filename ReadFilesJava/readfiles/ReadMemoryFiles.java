@@ -1,8 +1,6 @@
 package readfiles;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,26 +9,29 @@ import java.util.stream.Collectors;
 
 import enums.interfaces.InputData;
 import enums.FileType;
+import enums.Metrics;
 import enums.interfaces.AppName;
-import enums.interfaces.Modes;
 import utils.FileTools;
-import utils.RTools;
 
 public class ReadMemoryFiles {
    
-    private enum ModeEnumMemory implements Modes{
-        MEMORY("mm"),
-        HEAP_SIZE("hs"),
-        HEAP_ALLOC("ha"),
-        HEAP_FREE("hf");
+    private enum MemoryMetrics implements Metrics{
+        MEMORY("memory"),
+        HEAP_SIZE("heap_size"),
+        HEAP_ALLOC("heap_alloc"),
+        HEAP_FREE("heap_free");
     
         private final String shortVersion;
-        ModeEnumMemory(String shortVersion){
+        MemoryMetrics(String shortVersion){
             this.shortVersion = shortVersion;
         }
-        public String getShortVersion(){
+        public String shortVersion(){
             return shortVersion;
         }
+    }
+
+    public static Metrics[] metrics(){
+        return MemoryMetrics.values();
     }
 
     private String path;
@@ -38,16 +39,9 @@ public class ReadMemoryFiles {
     private AppName framework;
     private int numberOfFiles;
 
-    private List<Double> consumption = new ArrayList<>();
-    private List<Double> heapSize = new ArrayList<>();
-    private List<Double> heapAlloc = new ArrayList<>();
-    private List<Double> heapFree = new ArrayList<>();
+    private Map<Integer, Map<Metrics, Double>> map = new HashMap<>();
+    private Map<Metrics, Double> mapMetrics = new HashMap<>();
 
-    private Map<Modes, String> map = new HashMap<>();
-
-    public static List<? extends Modes> modes(){
-        return List.of(ModeEnumMemory.values());
-    }
 
     public ReadMemoryFiles(String path, AppName framework, int numberOfFiles, String device){
         this.path = path;
@@ -56,43 +50,14 @@ public class ReadMemoryFiles {
         this.device = device;
     }
 
-    public Map<Modes, String> readAll(InputData[] benchmarkSet) {
-        Arrays.asList(benchmarkSet).forEach(benchmark -> readSingle(benchmark));
-        return map;
-    }
-
-    public void readSingle(InputData benchmark) {
-        int i = numberOfFiles > 30 ? numberOfFiles-30 : 1;
-        for (; i < numberOfFiles + 1; i++) 
+    public Map<Integer, Map<Metrics, Double>> readSingle(InputData benchmark) {
+        int i = 1;
+        for (; i < numberOfFiles + 1; i++){
+            mapMetrics = new HashMap<>();
             executeReadFile(i, benchmark);
-        storeData(benchmark);
-    }
-
-    private void storeData(InputData benchmark) {
-        mergeData(benchmark);
-        clearData();
-    }
-
-    private void clearData() {
-        consumption.clear();
-        heapAlloc.clear();
-        heapFree.clear();
-        heapSize.clear();
-    }
-
-    private void mergeData(InputData benchmark) {
-        map.merge(ModeEnumMemory.MEMORY,
-                RTools.putInRFormat(ModeEnumMemory.MEMORY,benchmark, framework, consumption),
-                (x,y) -> x+y);
-        map.merge(ModeEnumMemory.HEAP_ALLOC,
-                RTools.putInRFormat(ModeEnumMemory.HEAP_ALLOC,benchmark, framework, heapAlloc),
-                (x,y) -> x+y);
-        map.merge(ModeEnumMemory.HEAP_FREE,
-                RTools.putInRFormat(ModeEnumMemory.HEAP_FREE,benchmark, framework, heapFree),
-                (x,y) -> x+y);
-        map.merge(ModeEnumMemory.HEAP_SIZE,
-                RTools.putInRFormat(ModeEnumMemory.HEAP_SIZE, benchmark, framework, heapSize),
-                (x,y) -> x+y);
+            map.put(i, mapMetrics);
+        }
+        return map;
     }
 
     private void executeReadFile(int fileNumber, InputData benchmark) {
@@ -103,7 +68,7 @@ public class ReadMemoryFiles {
                             framework, device, 
                             benchmark, fileNumber)); 
 
-        final double fromKBtoMB = 1024.0;
+        final double fromKBtoMB = 1000.0;
 
         try ( Scanner scnr = new Scanner(file);){
             while (scnr.hasNextLine()) {
@@ -112,10 +77,10 @@ public class ReadMemoryFiles {
                     List<String> elems = 
                     List.of(line.split(" ")).stream().filter(
                         (str) -> !str.equals("")).collect(Collectors.toList());
-                    consumption.add(Double.parseDouble(elems.get(1))/fromKBtoMB);
-                    heapFree.add(Double.parseDouble(elems.get(elems.size()-1))/fromKBtoMB);
-                    heapAlloc.add(Double.parseDouble(elems.get(elems.size()-2))/fromKBtoMB);
-                    heapSize.add(Double.parseDouble(elems.get(elems.size()-3))/fromKBtoMB);
+                    mapMetrics.put(MemoryMetrics.MEMORY,Double.parseDouble(elems.get(1))/fromKBtoMB);
+                    mapMetrics.put(MemoryMetrics.HEAP_FREE,Double.parseDouble(elems.get(elems.size()-1))/fromKBtoMB);
+                    mapMetrics.put(MemoryMetrics.HEAP_ALLOC,Double.parseDouble(elems.get(elems.size()-2))/fromKBtoMB);
+                    mapMetrics.put(MemoryMetrics.HEAP_SIZE,Double.parseDouble(elems.get(elems.size()-3))/fromKBtoMB);
                 }
             }
         } catch (FileNotFoundException e) {

@@ -39,4 +39,15 @@ public class ConversionTools{
         
         return round(min * 60 + sec + (mil / 1000), PRECISION);
     }
+
+    public static Double memoryInMB(String data) {
+        if(data.contains("MB"))
+            return Double.parseDouble(data.split("MB")[0]);
+        else if(data.contains("GB"))
+            return Double.parseDouble(data.split("GB")[0])*1000;
+        else if(data.contains("KB"))
+            return Double.parseDouble(data.split("KB")[0])/1000;
+        else
+            return null;
+    }
 }
