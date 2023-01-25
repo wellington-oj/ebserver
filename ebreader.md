@@ -33,7 +33,7 @@ The information setup for all four examples will be presented below.
     Unconnect the usb cable.
 
 ## 4 Starting Ebserver
-    in the terminal, go to ebserver/src and type node index.js
+    in the terminal, go to ebserver/src and type 'node index.js'
     on the device, start the desired application
 
 ## 5 Advanced Configuring Ebserver
