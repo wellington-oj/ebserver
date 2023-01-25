@@ -19,12 +19,12 @@ public class ReadMemoryFiles extends ReadFiles{
         HEAP_ALLOC("heap_alloc"),
         HEAP_FREE("heap_free");
     
-        private final String shortVersion;
-        MemoryMetrics(String shortVersion){
-            this.shortVersion = shortVersion;
+        private final String value;
+        MemoryMetrics(String value){
+            this.value = value;
         }
-        public String shortVersion(){
-            return shortVersion;
+        public String value(){
+            return value;
         }
     }
 

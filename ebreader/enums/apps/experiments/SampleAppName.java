@@ -2,7 +2,7 @@ package enums.apps.experiments;
 
 import enums.interfaces.AppName;
 
-public enum ExampleNames implements AppName {
+public enum SampleAppName implements AppName {
 
     APP_1("com.example.starter"), 
     APP_2("com.android.starter");
@@ -10,7 +10,7 @@ public enum ExampleNames implements AppName {
     private final String appName;
     private String appID;
 
-    private ExampleNames(String appName) {
+    private SampleAppName(String appName) {
         this.appName = appName;
     }
 

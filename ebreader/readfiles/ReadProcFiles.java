@@ -18,12 +18,12 @@ public class ReadProcFiles extends ReadFiles{
         DATA_MEMORY_MED("pss_med"),
         DATA_MEMORY_HIGH("pss_high");
     
-        private String shortVersion;
-        MetricsData(String shortVersion){
-            this.shortVersion = shortVersion;
+        private String value;
+        MetricsData(String value){
+            this.value = value;
         }
-        public String shortVersion(){
-            return shortVersion;
+        public String value(){
+            return value;
         }
     }
 

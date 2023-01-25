@@ -2,7 +2,7 @@ package enums.apps.experiments;
 
 import enums.interfaces.ExpData;
 
-public enum ExampleExperiment implements ExpData {
+public enum SampleExpData implements ExpData {
     
     INPUT_FOO_1("foo","10", "foo10"),
     INPUT_FOO_2("foo","15", "foo15"),     
@@ -12,7 +12,7 @@ public enum ExampleExperiment implements ExpData {
     private final String workload;
     private final String shortVersion;
    
-    private ExampleExperiment(String value, String workload, String shortVersion){
+    private SampleExpData(String value, String workload, String shortVersion){
         this.value = value;
         this.workload = workload;
         this.shortVersion = shortVersion;

@@ -1,7 +1,7 @@
 package main;
 import enums.DeviceNames;
-import enums.apps.experiments.ExampleExperiment;
-import enums.apps.experiments.ExampleNames;
+import enums.apps.experiments.SampleExpData;
+import enums.apps.experiments.SampleAppName;
 import enums.interfaces.AppName;
 import enums.interfaces.ExpData;
 
@@ -17,7 +17,7 @@ public class Main {
     
     public static void main(final String[] args) {
  
-        AppData test = new AppData("test", ExampleNames.values(), ExampleExperiment.values());
+        AppData test = new AppData("test", SampleAppName.values(), SampleExpData.values());
         new RunAnalysis(test).run();
     }    
 }

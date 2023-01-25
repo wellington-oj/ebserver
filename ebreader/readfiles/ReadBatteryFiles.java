@@ -19,12 +19,12 @@ public class ReadBatteryFiles extends ReadFiles{
         FOREGROUND_TIME("exec_time"),
         CPU_TIME("cpu_time");
     
-        private final String shortVersion;
-        MetricsEnergy(String shortVersion){
-            this.shortVersion = shortVersion;
+        private final String value;
+        MetricsEnergy(String value){
+            this.value = value;
         }
-        public String shortVersion(){
-            return shortVersion;
+        public String value(){
+            return value;
         }
     }
 

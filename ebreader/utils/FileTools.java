@@ -49,7 +49,7 @@ public class FileTools {
         try (PrintWriter pw = new PrintWriter(csvFile)){
             pw.write("nExec,"
                 +metrics.stream()
-                    .map(m -> m.shortVersion())
+                    .map(m -> m.value())
                     .collect(Collectors.joining(", "))
                 +"\n");
             for(Integer i : mapData.keySet()){
