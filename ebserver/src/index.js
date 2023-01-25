@@ -87,6 +87,8 @@ readInput();
 async function readInput() {
     if(process.argv.length > 2){
         test.runTests(process.argv);
+    }else{
+        console.log(">> Running Individual Executions Mode")
     }
 }
 /*process.argv.forEach(function (val, index, array) {

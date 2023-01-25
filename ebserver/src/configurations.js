@@ -1,6 +1,4 @@
 const defaultConfig = require("./configurationsFolder/defaultConfiguration")
-const s20feConfig = require("./configurationsFolder/s20feConfiguration")
-const note7proConfig = require("./configurationsFolder/note7proConfiguration")
 
 const configurations = {}
 
@@ -23,7 +21,7 @@ function plainConfigs(config) {
 
 function addConfig(config){
     configurations[config.key] = {
-        "benchmarks": plainConfigs(config.benchmarks),
+        "experiments": plainConfigs(config.experiments),
         "start_execution": config.start_execution,
         "end_execution": config.end_execution
     }
@@ -37,10 +35,6 @@ function getConfiguration(device) {
     }
 }
 
-
-
 addConfig(defaultConfig)
-addConfig(s20feConfig)
-addConfig(note7proConfig)
 
 module.exports = { getConfiguration }
