@@ -37,7 +37,7 @@ async function outputBatteryStatsTest(framework, currentTest, counter, packageNa
 async function outputMemInfo(targetDevice="", packageName="", dir, fileName) {
     try {
         if(targetDevice === ""){
-            await exec(`adb shell dumpsys meminfo ${packageName}.test -d > "${dir + "/memory-" + fileName}"`)
+            await exec(`adb shell dumpsys meminfo ${packageName}.test -d > "${dir + "/meminfo-" + fileName}"`)
         }else{
             const pid = await exec(`adb -s ${targetDevice} shell pidof ${packageName}`)
             await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${pid.stdout.trim()} -d > "${dir + "/memory-" + fileName}"`)
@@ -53,7 +53,7 @@ async function outputEnergy(targetDevice="", dir, fileName) {
         if(targetDevice === ""){
             await exec(`adb shell dumpsys batterystats > "${dir + "/energy-" + fileName}"`)
         }else{
-            await exec(`adb -s ${targetDevice} shell dumpsys batterystats > "${dir + "/energy-" + fileName}"`)
+            await exec(`adb -s ${targetDevice} shell dumpsys batterystats > "${dir + "/batterystats-" + fileName}"`)
         }
     } catch (error) {
         console.log(`ERROR OUTPUTTING ENERGY DATA ${targetDevice}`)
@@ -66,7 +66,7 @@ async function outputData(targetDevice="", dir, fileName){
             await exec(`adb shell dumpsys procstats --hours 1 > "${dir + "/data-" + fileName}"`)
         }
         else{
-            await exec(`adb -s ${targetDevice} shell dumpsys procstats --hours 1 > "${dir + "/data-" + fileName}"`)
+            await exec(`adb -s ${targetDevice} shell dumpsys procstats --hours 1 > "${dir + "/procstats-" + fileName}"`)
         }
     } catch (error) {
         console.log(`ERROR OUTPUTTING DATA ${targetDevice}`)
