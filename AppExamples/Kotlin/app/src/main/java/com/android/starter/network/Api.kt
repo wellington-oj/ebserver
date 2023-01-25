@@ -5,8 +5,8 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 private const val APP_ID = "com.android.starter"
-private const val FRAMEWORK = "JAVA"
-private const val TEST_TYPE = "benchmarkGame"
+private const val FRAMEWORK = "KOTLIN"
+private const val TEST_TYPE = "example"
 
 interface Api {
     @GET("/what_now")

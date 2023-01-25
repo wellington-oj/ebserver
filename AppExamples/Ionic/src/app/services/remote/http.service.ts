@@ -13,7 +13,7 @@ export class HttpService {
 
   private basePath = 'http://192.168.1.68:3000/';
   //change the above to your local ebserver ip address and the port.
-  private testType = "benchmarkGame";
+  private testType = "example";
   private app_id = "io.ionic.starter";
   private framework = "IONIC";
 

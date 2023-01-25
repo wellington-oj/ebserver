@@ -9,7 +9,7 @@ const FINISH_ENDPOINT = "done/";
 
 const APP_ID = "com.example.starter";
 const FRAMEWORK = "FLUTTER";
-const TEST_TYPE = "benchmarkGame";
+const TEST_TYPE = "example";
 
 class ProgramExecution {
   late String program;
