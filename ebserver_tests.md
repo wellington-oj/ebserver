@@ -19,5 +19,5 @@ The information setup for all four examples will be presented below.
 
 ## 3 Starting Ebserver
     go to ebserver/src/testModule.js and change 'app_name' to the desired app
-    in the terminal, go to ebserver/src and type 'node index.js TEST_CLASS PACKAGE METHOD'
-    where TEST_CLASS it's the class to be executed, PACKAGE the full package name of that class, and METHOD the name of the method.
+    in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
+    where TEST_CLASS it's the class to be executed, PACKAGE the full package name of that class, and METHOD the name of the method, and SUFIX is the sufix to be applied to the package name
