@@ -2,16 +2,17 @@ const fs = require("fs");
 const util = require('util');
 const exec = util.promisify(require("child_process").exec);
 
+function getTarget(targetDevice = ""){
+    if(targetDevice  === ""){
+        return `-s ${targetDevice}`
+    }
+    return " "
+}
+
 async function cleanBatteryStatus(targetDevice) {
     try {
-        if(targetDevice === ""){
-            await exec(`adb shell dumpsys procstats --clear`)
-            await exec(`adb shell dumpsys batterystats --reset`)
-        }
-        else{
-            await exec(`adb -s ${targetDevice} shell dumpsys procstats --clear`)
-            await exec(`adb -s ${targetDevice} shell dumpsys batterystats --reset`)
-        }
+        await exec("adb" + getTarget(targetDevice) + "shell dumpsys procstats --clear")
+        await exec("adb" + getTarget(targetDevice) + "shell dumpsys batterystats --reset")
     } catch (error) {
         console.log(`ERROR CLEANING STATUS ${targetDevice}`)
     }
@@ -19,7 +20,8 @@ async function cleanBatteryStatus(targetDevice) {
 
 async function outputBatteryStatsTo(targetDevice, framework, currentTest, counter, packageName) {
     const fileName = `${counter}.txt`
-    const device = await exec('adb shell getprop ro.product.model');
+    const device = await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")
+    console.log(device.stdout.trim());
     createDirIfNotExists(fs, 'experiment-results')
     createDirIfNotExists(fs, 'experiment-results/' + framework)
     createDirIfNotExists(fs, 'experiment-results/' + framework + '/' + device.stdout.trim())
@@ -37,10 +39,10 @@ async function outputBatteryStatsTest(framework, currentTest, counter, packageNa
 async function outputMemInfo(targetDevice="", packageName="", dir, fileName) {
     try {
         if(targetDevice === ""){
-            await exec(`adb shell dumpsys meminfo ${packageName}.test -d > "${dir + "/meminfo-" + fileName}"`)
+            await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${packageName}.test -d > "${dir + "/meminfo-" + fileName}"`)
         }else{
-            const pid = await exec(`adb -s ${targetDevice} shell pidof ${packageName}`)
-            await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${pid.stdout.trim()} -d > "${dir + "/memory-" + fileName}"`)
+            // const pid = await exec(`adb -s ${targetDevice} shell pidof ${packageName}`)
+            await exec(`adb -s ${targetDevice} shell dumpsys meminfo ${packageName} -d > "${dir + "/meminfo-" + fileName}"`)
         }
         
     } catch (error) {
@@ -50,24 +52,15 @@ async function outputMemInfo(targetDevice="", packageName="", dir, fileName) {
 
 async function outputEnergy(targetDevice="", dir, fileName) {
     try {
-        if(targetDevice === ""){
-            await exec(`adb shell dumpsys batterystats > "${dir + "/energy-" + fileName}"`)
-        }else{
-            await exec(`adb -s ${targetDevice} shell dumpsys batterystats > "${dir + "/batterystats-" + fileName}"`)
-        }
+        await exec("adb" + getTarget(targetDevice) + "shell dumpsys batterystats > " + dir + "/batterystats-" + fileName)
     } catch (error) {
         console.log(`ERROR OUTPUTTING ENERGY DATA ${targetDevice}`)
     }
 }
 
 async function outputData(targetDevice="", dir, fileName){
-    try { 
-        if(targetDevice === ""){
-            await exec(`adb shell dumpsys procstats --hours 1 > "${dir + "/data-" + fileName}"`)
-        }
-        else{
-            await exec(`adb -s ${targetDevice} shell dumpsys procstats --hours 1 > "${dir + "/procstats-" + fileName}"`)
-        }
+    try {
+        await exec("adb" + getTarget(targetDevice) + "shell dumpsys procstats --hours 1 > " + dir + "/procstats-" + fileName)
     } catch (error) {
         console.log(`ERROR OUTPUTTING DATA ${targetDevice}`)
     }
@@ -75,7 +68,7 @@ async function outputData(targetDevice="", dir, fileName){
 
 async function startApp(targetDevice, applicationId, mainActivity) {
     try {
-        await exec(`adb -s ${targetDevice} shell am start -n ${applicationId}/${mainActivity}`)
+        await exec("adb" + getTarget(targetDevice) + "shell am start -n " + applicationId + "/" + mainActivity)
     } catch (error) {
         console.log(`ERROR STARTING APP ${targetDevice}`)
     }
@@ -91,12 +84,7 @@ async function startTest(className, methodName, packageName) {
 
 async function killApp(targetDevice, applicationId) {
     try {
-        if(targetDevice === ""){
-            await exec(`adb shell pm clear ${applicationId}`)
-        }
-        else{
-            await exec(`adb -s ${targetDevice} shell pm clear ${applicationId}`)
-        }
+        await exec("adb" + getTarget(targetDevice) + "shell pm clear " + applicationId)
     } catch (error) {
         console.log(`ERROR KILLING APP ${targetDevice} ${applicationId}`)
     }

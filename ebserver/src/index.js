@@ -3,25 +3,74 @@ const cors = require('cors');
 const session = require("./session")
 const adb = require("./adbCommands")
 const test = require("./testModule")
-//const fs = require('fs')
-//const https = require('https')
-
-//var options = {
-//    key: fs.readFileSync('../key.pem'),
-//    cert: fs.readFileSync('../cert.pem')
-//};
-
 
 const app = express()
-
 app.use(cors())
 
-//https.createServer(app).listen(3001);
-//https.createServer(options, app).listen(3002);
+const timeout_seconds = 120
+let timerObj = {}
+function clearTimerObj(device){
+    if(timerObj[device]){
+        clearTimeout(timerObj[device])
+        delete timerObj[device]
+    }
+}
 
+async function what_now(ip, device, test_type, application_id, activity, timerObj) {
+    await adb.cleanBatteryStatus(ip)
+    const [execution, execution_number] = session.getCurrentExecution(
+        device,
+        test_type
+    )
+    console.log(` --- what_now ${device} ${test_type}, ${execution}, ${execution_number}`);
+    clearTimerObj(
+        device
+    )
+    timerObj[device] = setTimeout(() => {
+        console.log(`timeout ${device}-${execution}`);
+        done(
+            ip, 
+            device, 
+            test_type, 
+            application_id, 
+            activity
+        )
+    }, timeout_seconds * 1000);
+    return execution
+}
 
-//const server = https.createServer({key: key, cert: cert }, app)
+async function logdata(ip, device, test_type, framework, application_id) {
+    clearTimerObj(device)
+    const [execution, execution_number] = session.getCurrentExecution(
+        device,
+        test_type
+    )
+    console.log(`logdata ${device} ${test_type}, ${execution}, ${execution_number}`)
+    await adb.outputBatteryStatsTo(
+        ip,
+        framework,
+        execution,
+        execution_number,
+        application_id
+    )
+}
 
+async function done(ip, device, test_type, application_id, activity) {
+    const [execution, execution_number] = session.getCurrentExecution(
+        device,
+        test_type
+    )
+    console.log(`done ${device} ${test_type}, ${execution}, ${execution_number}`)
+    session.updateExecution(
+        device, 
+        test_type
+    )
+    await adb.done(
+        ip,
+        application_id,
+        activity
+    )
+}
 
 app.get("/", (req, res) => {
     res.send("index")
@@ -29,60 +78,46 @@ app.get("/", (req, res) => {
 
 app.get("/what_now", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
-    await adb.cleanBatteryStatus(ip)
-    const [execution, execution_number] = session.getCurrentExecution(
-        req.headers.device,
-        req.headers.test_type
+    const execution = await what_now(
+        ip, 
+        req.headers.device, 
+        req.headers.test_type, 
+        req.headers.application_id, 
+        req.headers.activity,
+        timerObj
     )
-    console.log("---------------------------------------------------");
-    console.log(`what_now ${req.headers.device} ${req.headers.test_type}, ${execution}, ${execution_number}`);
-    console.log("---------------------------------------------------");
     res.send(execution)
 })
 
 app.get("/logdata", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
-    const [execution, execution_number] = session.getCurrentExecution(
-        req.headers.device,
-        req.headers.test_type
-    )
-    console.log(`logdata ${req.headers.device} ${req.headers.test_type}, ${execution}, ${execution_number}`)
-    await adb.outputBatteryStatsTo(
+    await logdata(
         ip,
+        req.headers.device,
+        req.headers.test_type,
         req.headers.framework,
-        execution,
-        execution_number,
         req.headers.application_id
-    )
+    )    
     res.send("done")
 })
 
 app.get("/done", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
-    const [execution, execution_number] = session.getCurrentExecution(
-        req.headers.device,
-        req.headers.test_type
-    )
-    console.log(`done ${req.headers.device} ${req.headers.test_type}, ${execution}, ${execution_number}`)
-    session.updateExecution(
+    done(
+        ip, 
         req.headers.device, 
-        req.headers.test_type
-    )
-    await adb.done(
-        ip,
-        req.headers.application_id,
+        req.headers.test_type, 
+        req.headers.application_id, 
         req.headers.activity
     )
     res.send("")
 })
 
-
 app.listen(3000, () => {
-    if(process.argv.length <= 2) console.log("Dashboard app listening on port " + 3000 + "!");
+    if(process.argv.length <= 2) console.log("Ebserver listening on port " + 3000 + "!");
 });
 
 readInput();
-
 
 async function readInput() {
     if(process.argv.length > 2){
@@ -91,22 +126,4 @@ async function readInput() {
         console.log(">> Running Individual Executions Mode")
     }
 }
-/*process.argv.forEach(function (val, index, array) {
-  if (index === 2 && val === '-t'){
-    myPort = val;
-    console.log("ae");
-  }
-  if (index === 3) {
-    targetDeviceIP = val;
-    console.log("Target device ip set to: " + targetDeviceIP);
-  }
-  if (index === 4) {
-    myIpAddress = val;
-    console.log("As informed by the user, my ip address is: " + myIpAddress);
-  }
-});    
-}*/
-
-
-
 
