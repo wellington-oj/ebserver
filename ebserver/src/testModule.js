@@ -22,7 +22,7 @@ async function runTests(args){
         while(execution_index < end_execution){
             console.log("exec #"+i);
             await adb.cleanBatteryStatus("")
-            await adb.startTest(className, methodName, packageName)
+            await adb.startUITest(className, methodName, packageName)
             await adb.outputBatteryStatsTest(
                     app_name,
                     methodName,

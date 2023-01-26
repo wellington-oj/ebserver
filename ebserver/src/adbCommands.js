@@ -57,11 +57,11 @@ async function startApp(targetDevice, applicationId, mainActivity) {
     }
 }
 
-async function startTest(className, methodName, packageName) {
+async function startUITest(className, methodName, packageName) {
     try {
        await exec(`adb shell am instrument -w -e debug false -e class ${packageName}.${className}#${methodName} ${packageName}.test/androidx.test.runner.AndroidJUnitRunner`)
     } catch (error) {
-        console.log(`ERROR STARTING APP here?`)
+        console.log(`ERROR STARTING APP`)
     }
 }
 
@@ -86,5 +86,5 @@ function createDirIfNotExists(fs, dir) {
 }
 
 module.exports = {
-    cleanBatteryStatus, outputBatteryStatsTo, outputBatteryStatsTest, done, startTest
+    cleanBatteryStatus, outputBatteryStatsTo, outputBatteryStatsTest, done, startUITest
 }
