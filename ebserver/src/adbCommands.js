@@ -10,23 +10,20 @@ async function runCommand(command, targetDevice, dir, fileName){
     }	
 }
 
-function getTarget(targetDevice = ""){
-    if(targetDevice  === ""){
-        return `-s ${targetDevice}`
-    }
-    return " "
+function getTarget(targetDevice){
+    return targetDevice  === "" ? " " : ` -s ${targetDevice} `
 }
 
 async function cleanBatteryStatus(targetDevice) {
     try {
-        await exec("adb" + getTarget(targetDevice) + "shell dumpsys procstats --clear")
-        await exec("adb" + getTarget(targetDevice) + "shell dumpsys batterystats --reset")
+        await exec(`adb ${getTarget(targetDevice)} shell dumpsys procstats --clear`)
+        await exec(`adb ${getTarget(targetDevice)} shell dumpsys batterystats --reset`)
     } catch (error) {
         console.log(`ERROR CLEANING STATUS ${targetDevice}`)
     }
 }
 
-async function outputBatteryStatsTo(targetDevice, framework, currentTest, counter, packageName) {
+async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, counter, packageName) {
     const fileName = `${counter}.txt`
     const device = await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")
     createDirIfNotExists(fs, 'experiment-results')
@@ -57,9 +54,9 @@ async function startApp(targetDevice, applicationId, mainActivity) {
     }
 }
 
-async function startUITest(className, methodName, packageName) {
+async function startUITest(className, methodName, packageName, sufix) {
     try {
-       await exec(`adb shell am instrument -w -e debug false -e class ${packageName}.${className}#${methodName} ${packageName}.test/androidx.test.runner.AndroidJUnitRunner`)
+       await exec(`adb shell am instrument -w -e debug false -e class ${packageName}.${className}#${methodName} ${packageName}.${sufix}/androidx.test.runner.AndroidJUnitRunner`)
     } catch (error) {
         console.log(`ERROR STARTING APP`)
     }
