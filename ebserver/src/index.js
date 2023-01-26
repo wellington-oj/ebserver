@@ -114,7 +114,7 @@ app.get("/done", async (req, res) => {
 })
 
 app.listen(3000, () => {
-    if(process.argv.length <= 2) console.log("Dashboard app listening on port " + 3000 + "!");
+    if(process.argv.length <= 2) console.log("Ebserver listening on port " + 3000 + "!");
 });
 
 readInput();
