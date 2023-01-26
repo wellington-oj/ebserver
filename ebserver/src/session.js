@@ -20,7 +20,7 @@ function getCurrentSession(device, test_type) {
         const config = configurations.getConfiguration(device)
         addSession(
             device,
-            config.benchmarks[test_type][0],
+            config.experiments[test_type][0],
             config.start_execution,
             config,
             test_type

@@ -23,11 +23,11 @@ async function what_now(ip, device, test_type, application_id, activity, timerOb
         test_type
     )
     console.log(` --- what_now ${device} ${test_type}, ${execution}, ${execution_number}`);
-    res.send(execution)
     clearTimerObj(
         device
     )
     timerObj[device] = setTimeout(() => {
+        console.log(`timeout ${device}-${execution}`);
         done(
             ip, 
             device, 
@@ -36,6 +36,7 @@ async function what_now(ip, device, test_type, application_id, activity, timerOb
             activity
         )
     }, timeout_seconds * 1000);
+    return execution
 }
 
 async function logdata(ip, device, test_type, framework, application_id) {
@@ -44,11 +45,10 @@ async function logdata(ip, device, test_type, framework, application_id) {
         device,
         test_type
     )
-    console.log(`logdata ${req.headers.device} ${req.headers.test_type}, ${execution}, ${execution_number}`)
+    console.log(`logdata ${device} ${test_type}, ${execution}, ${execution_number}`)
     await adb.outputBatteryStatsTo(
         ip,
         framework,
-        device,
         execution,
         execution_number,
         application_id
@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
 
 app.get("/what_now", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
-    await what_now(
+    const execution = await what_now(
         ip, 
         req.headers.device, 
         req.headers.test_type, 
