@@ -40,7 +40,7 @@ function updateExecution(device, test_type) {
         session.current_execution += 1
     } else {
         session.current_execution = session.configuration.start_execution
-        const execution_list = session.configuration.benchmarks[test_type]
+        const execution_list = session.configuration.experiments[test_type]
         const algoritm_index = execution_list.indexOf(session.current_algoritm)
         if(algoritm_index < (execution_list.length - 1)) {
             session.current_algoritm = execution_list[algoritm_index + 1]

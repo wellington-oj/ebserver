@@ -26,7 +26,10 @@ export class HttpService {
           responseType: 'text',
           headers: {
             'device': device_model,
-            'test_type': this.testType
+            'test_type': this.testType,
+            'application_id': this.app_id,
+            'framework': this.framework,
+            'activity': '.MainActivity'
           }
         }
       ).toPromise()
@@ -50,13 +53,13 @@ export class HttpService {
             'device': device_model,
             'test_type': this.testType,
             'application_id': this.app_id,
-            'framework': this.framework
+            'framework': this.framework,
+            'activity': '.MainActivity'
           }
         }
       ).toPromise()
     } catch (error){
       console.log(error.message);
-      console.log(error.code);
     }
     return null
   }
@@ -72,13 +75,13 @@ export class HttpService {
             'device': device_model,
             'test_type': this.testType,
             'application_id': this.app_id,
+            'framework': this.framework,
             'activity': '.MainActivity'
           }
         }
       ).toPromise()
     } catch (error){
       console.log(error.message);
-      console.log(error.code);
     }
     
   }

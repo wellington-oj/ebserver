@@ -1,0 +1,12 @@
+{
+    "program-types": ["example"],
+    "example": {
+        "experiments": ["foo", "boo"],
+        "parameters": {
+            "foo": [10,15],
+            "boo": [10]
+        }
+    },
+    "start_execution": 1,
+    "end_execution": 45
+}
