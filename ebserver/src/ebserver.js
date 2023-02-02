@@ -22,7 +22,7 @@ async function what_now(ip, device, test_type, application_id, activity, timerOb
         device,
         test_type
     )
-    console.log(` --- what_now ${device} ${test_type}, ${execution}, ${execution_number}`);
+    console.log(` + what_now ${device} ${test_type}, ${execution}, ${execution_number}`);
     clearTimerObj(
         device
     )
@@ -45,7 +45,7 @@ async function logdata(ip, device, test_type, framework, application_id) {
         device,
         test_type
     )
-    console.log(`logdata ${device} ${test_type}, ${execution}, ${execution_number}`)
+    console.log(` | logdata ${device} ${test_type}, ${execution}, ${execution_number}`)
     await adb.outputBatteryStatsTo(
         ip,
         framework,
@@ -60,7 +60,7 @@ async function done(ip, device, test_type, application_id, activity) {
         device,
         test_type
     )
-    console.log(`done ${device} ${test_type}, ${execution}, ${execution_number}`)
+    console.log(` - done ${device} ${test_type}, ${execution}, ${execution_number}`)
     session.updateExecution(
         device, 
         test_type

@@ -10,18 +10,18 @@ The information setup for all four examples will be presented below.
 
 ### 1.1 Kotlin example
     on network/Repository.kt change the variable 'ip' to the ebserver ip
-    on res/xml/network_security_config.xml include ebserver ip 
+    on res/xml/network_security_config.xml include ebserver ip
 
 ### 1.2 Flutter example
     on lib/main.dart change 'BASE_URL' to the ebserver ip
 
 ### 1.3 Ionic example
     on src/app/services/remote/http.service.ts change 'basePath' to the ebserver ip
-    on android/app/src/main/res/xml/network_security_config.xml include ebserver ip 
+    on android/app/src/main/res/xml/network_security_config.xml include ebserver ip
 
 ### 1.4 React Native example
     on App.js change 'localhostip' to the ebserver ip
-    android/app/src/main/res/xml/network_security_config.xml include ebserver ip 
+    android/app/src/main/res/xml/network_security_config.xml include ebserver ip
 
 ## 3 Connecting Device
     Enable usb debugging on the device
@@ -33,7 +33,7 @@ The information setup for all four examples will be presented below.
     Unconnect the usb cable.
 
 ## 4 Starting Ebserver
-    in the terminal, go to ebserver/src and type 'node index.js'
+    in the terminal, go to ebserver/src and type 'node ebserver.js'
     on the device, start the desired application
 
 ## 5 Advanced Configuring Ebserver
