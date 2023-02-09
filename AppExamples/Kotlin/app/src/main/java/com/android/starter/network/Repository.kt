@@ -1,6 +1,7 @@
 package com.android.starter.network
 
 import android.util.Log
+import com.android.starter.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -18,7 +19,8 @@ class Repository {
     suspend fun started(): String {
         Log.i("REQUEST", "WHATNOW")
         val call = service.started(
-            device = android.os.Build.MODEL
+            device = android.os.Build.MODEL,
+            appId = BuildConfig.APPLICATION_ID
         )
         return call.body() ?: throw ApiError(call.errorBody()!!.toString())
     }
@@ -26,7 +28,8 @@ class Repository {
     suspend fun logData(): String {
         Log.i("REQUEST", "LOGDATA")
         val call = service.logData(
-            device = android.os.Build.MODEL
+            device = android.os.Build.MODEL,
+            appId = BuildConfig.APPLICATION_ID
         )
         return call.body() ?: throw ApiError(call.errorBody()!!.toString())
     }
@@ -34,7 +37,8 @@ class Repository {
     suspend fun done(): String {
         Log.i("REQUEST", "DONE")
         val call = service.done(
-            device = android.os.Build.MODEL
+            device = android.os.Build.MODEL,
+            appId = BuildConfig.APPLICATION_ID
         )
         return call.body() ?: throw ApiError(call.errorBody()!!.toString())
     }
