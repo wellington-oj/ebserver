@@ -10,6 +10,7 @@ const FINISH_ENDPOINT = "done/";
 const APP_ID = "com.example.starter";
 const FRAMEWORK = "FLUTTER";
 const TEST_TYPE = "example";
+const ACTIVITY = '.MainActivity';
 
 class ProgramExecution {
   late String program;
@@ -24,7 +25,10 @@ Future<ProgramExecution> start() async {
       Uri.parse(BASE_URL + START_ENDPOINT),
       headers: {
         'device': androidInfo.model!,
-        'test_type': TEST_TYPE
+        'application_id': APP_ID,
+        'test_type': TEST_TYPE,
+        'activity': ACTIVITY,
+        'framework': FRAMEWORK
       }
   );
   if (response.statusCode == 200){
@@ -40,8 +44,9 @@ Future<void> logdata() async {
       Uri.parse(BASE_URL + LOGDATA_ENDPOINT),
       headers: {
         'device': androidInfo.model!,
-        'test_type': TEST_TYPE,
         'application_id': APP_ID,
+        'test_type': TEST_TYPE,
+        'activity': ACTIVITY,
         'framework': FRAMEWORK
       }
   );
@@ -56,9 +61,10 @@ void done() async {
       Uri.parse(BASE_URL + FINISH_ENDPOINT),
       headers: {
         'device': androidInfo.model!,
-        'test_type': TEST_TYPE,
         'application_id': APP_ID,
-        'activity': '.MainActivity'
+        'test_type': TEST_TYPE,
+        'activity': ACTIVITY,
+        'framework': FRAMEWORK
       }
   );
 }
