@@ -15,7 +15,8 @@ let hasCalled = false;
 
 const APP_ID = "com.react.example.starter";
 const FRAMEWORK = "REACT";
-const TEST_TYPE = "example";
+const TEST_TYPE = "benchmarkGame";
+const ACTIVITY = '.MainActivity';
 
 const localhostip = '192.168.1.68';
 
@@ -35,7 +36,9 @@ const App: () => Node = () => {
           method: 'GET',
           headers: {
             'device': deviceModel,
+            'application_id': APP_ID,
             'test_type': TEST_TYPE,
+            'activity':  ACTIVITY,
             'framework': FRAMEWORK
           }
         }
@@ -64,9 +67,10 @@ const sendLogData = async () => {
         method: 'GET',
         headers: {
           'device': deviceModel,
-          'test_type': TEST_TYPE,
-          'application_id': APP_ID,
-          'framework': FRAMEWORK
+            'application_id': APP_ID,
+            'test_type': TEST_TYPE,
+            'activity':  ACTIVITY,
+            'framework': FRAMEWORK
         }
       }
     );
@@ -88,9 +92,10 @@ const checkCorrectData = async isDone => {
           method: 'GET',
           headers: {
             'device': deviceModel,
-            'test_type': TEST_TYPE,
             'application_id': APP_ID,
-            'activity': '.MainActivity'
+            'test_type': TEST_TYPE,
+            'activity':  ACTIVITY,
+            'framework': FRAMEWORK
           }
         }
       );
