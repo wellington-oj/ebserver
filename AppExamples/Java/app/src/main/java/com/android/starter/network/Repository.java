@@ -12,7 +12,7 @@ public class Repository {
     private final String baseUrl = "http://$ip:3000/";
 
     private final String FRAMEWORK = "JAVA";
-    private final String TEST_TYPE = "benchmarkGame";
+    private final String TEST_TYPE = "example";
     private final String ACTIVITY = ".MainActivity";
 
     Api service = new Retrofit.Builder()

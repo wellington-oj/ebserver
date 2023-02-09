@@ -15,7 +15,7 @@ let hasCalled = false;
 
 const APP_ID = "com.react.example.starter";
 const FRAMEWORK = "REACT";
-const TEST_TYPE = "benchmarkGame";
+const TEST_TYPE = "example";
 const ACTIVITY = '.MainActivity';
 
 const localhostip = '192.168.1.68';
