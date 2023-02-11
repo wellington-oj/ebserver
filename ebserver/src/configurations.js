@@ -21,9 +21,9 @@ function plainConfigs(config) {
 }
 
 function loadConfigs(){
-    const configurations = fs.readdirSync("src/configurationsFolder")
+    const configurations = fs.readdirSync("configurationsFolder")
     configurations.forEach((configuration) => {
-        const raw = fs.readFileSync("src/configurationsFolder/" + configuration)
+        const raw = fs.readFileSync("configurationsFolder/" + configuration)
         const config = JSON.parse(raw)
         addConfig(config, configuration.substring(0, configuration.length-5))
     })

@@ -32,7 +32,7 @@ async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, c
     const dir = 'experiment-results/' + framework + '/' + '/' + device.stdout.trim() + '/' + currentTest
     createDirIfNotExists(fs, dir)
     
-    const meminfo = {name: "meminfo", params: ` ${packageName}.test -d`}
+    const meminfo = {name: "meminfo", params: ` ${packageName} -d`}
     const batterystats = {name: "batterystats", params: ""}
     const procstats = {name: "procstats", params: ` --hours 1`}
     

@@ -22,7 +22,7 @@ async function what_now(ip, device, test_type, application_id, activity, timerOb
         device,
         test_type
     )
-    console.log(` + what_now ${device} ${test_type}, ${execution}, ${execution_number}`);
+    console.log(` + fetch ${device} ${test_type}, ${execution}, ${execution_number}`);
     clearTimerObj(
         device
     )
@@ -76,7 +76,7 @@ app.get("/", (req, res) => {
     res.send("index")
 })
 
-app.get("/what_now", async (req, res) => {
+app.get("/fetch", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
     const execution = await what_now(
         ip, 

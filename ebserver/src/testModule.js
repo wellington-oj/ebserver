@@ -32,7 +32,7 @@ async function runTests(args){
                     app_name,
                     methodName,
                     execution_index,
-                    packageName
+                    packageName+'.'+sufix
                 )    
             execution_index++;
         }
