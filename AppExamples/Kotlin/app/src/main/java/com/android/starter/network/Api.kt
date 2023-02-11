@@ -10,7 +10,7 @@ private const val TEST_TYPE = "example"
 private const val ACTIVITY = ".MainActivity"
 
 interface Api {
-    @GET("/what_now")
+    @GET("/fetch")
     suspend fun started(
         @Header("device") device: String,
         @Header("application_id") appId: String,

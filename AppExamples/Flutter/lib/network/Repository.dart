@@ -3,7 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 const BASE_URL = "http://192.168.1.68:3000/";
 // change the ip above to the ebserver machine ip
-const START_ENDPOINT = "what_now/";
+const START_ENDPOINT = "fetch/";
 const LOGDATA_ENDPOINT = "logdata/";
 const FINISH_ENDPOINT = "done/";
 

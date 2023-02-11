@@ -27,11 +27,11 @@ const App: () => Node = () => {
 
   const whatNow = async () => {
     if (hasCalled) { return; }
-    console.log('http://' + localhostip + ':3000/' + 'what_now');
+    console.log('http://' + localhostip + ':3000/' + 'fetch');
     try {
       let deviceModel = await DeviceInfo.getModel()
       const response = await fetch(
-        'http://' + localhostip + ':3000/' + 'what_now',
+        'http://' + localhostip + ':3000/' + 'fetch',
         {
           method: 'GET',
           headers: {

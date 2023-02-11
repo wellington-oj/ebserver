@@ -8,8 +8,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Repository {
 
-    private final String ip = "192.168.184.195";
-    private final String baseUrl = "http://$ip:3000/";
+    private final String ip = "192.168.1.68";
+    private final String baseUrl = "http://"+ip+":3000/";
 
     private final String FRAMEWORK = "JAVA";
     private final String TEST_TYPE = "example";

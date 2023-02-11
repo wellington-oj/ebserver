@@ -6,7 +6,7 @@ import retrofit2.http.Header;
 
 interface Api {
 
-    @GET("/what_now")
+    @GET("/fetch")
     Call<String> started(
             @Header("device") String device,
             @Header("test_type") String currentTestType,

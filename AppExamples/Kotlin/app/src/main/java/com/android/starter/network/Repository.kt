@@ -17,7 +17,7 @@ class Repository {
         .create(Api::class.java)
 
     suspend fun started(): String {
-        Log.i("REQUEST", "WHATNOW")
+        Log.i("REQUEST", "FETCH")
         val call = service.started(
             device = android.os.Build.MODEL,
             appId = BuildConfig.APPLICATION_ID

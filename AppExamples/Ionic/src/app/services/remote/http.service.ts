@@ -18,7 +18,7 @@ export class HttpService {
   private framework = "IONIC";
 
   public async what_now() {
-    const path = this.basePath + 'what_now';
+    const path = this.basePath + 'fetch';
     const device_model = await (await Device.getInfo()).model
     try{
       const programString = await this.http.get(
