@@ -26,10 +26,10 @@ async function cleanBatteryStatus(targetDevice) {
 async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, counter, packageName) {
     const fileName = `${counter}.txt`
     const device = await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")
-    createDirIfNotExists(fs, 'experiment-results')
-    createDirIfNotExists(fs, 'experiment-results/' + framework)
-    createDirIfNotExists(fs, 'experiment-results/' + framework + '/' + device.stdout.trim())
-    const dir = 'experiment-results/' + framework + '/' + '/' + device.stdout.trim() + '/' + currentTest
+    createDirIfNotExists(fs, '../experiment-results')
+    createDirIfNotExists(fs, '../experiment-results/' + framework)
+    createDirIfNotExists(fs, '../experiment-results/' + framework + '/' + device.stdout.trim())
+    const dir = '../experiment-results/' + framework + '/' + '/' + device.stdout.trim() + '/' + currentTest
     createDirIfNotExists(fs, dir)
     
     const meminfo = {name: "meminfo", params: ` ${packageName} -d`}
