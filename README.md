@@ -1,28 +1,9 @@
 # Ebserver requirements and setup
 
-This document will present the steps necessary to setup Ebserver and run it on Individual Executions mode and Test Suite mode.
-The information setup for all four examples will be presented below.
+This document will present the steps necessary to setup Ebserver and run it on Individual Executions mode and UI Executions mode.
+The information setup for all four app examples will be presented below.
 
 ### requires: adb and node.js
-
-# Test Suite mode
-
-## 1 Configuring Applications
-    Find the development machine ip address.
-
-## 2 Connecting Device
-    Enable usb debugging on the device
-    Connect the device to the development machine via usb cable
-    The following commands should be done in the terminal:
-    Type 'adb tcpip 5555'
-    Type 'adb shell ip addr show wlan0' to find the ip address of the mobile device
-    Type 'adb connect MOBILE_IP_ADDRESS'
-    Unconnect the usb cable.
-
-## 3 Starting Ebserver
-go to ebserver/src/testModule.js and change 'app_name' to the desired app
-  in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
-  where TEST_CLASS it's the class to be executed, PACKAGE the full package name of that class, and METHOD the name of the method, and SUFIX is the sufix to be applied to the package name
 
 # Individual Executions mode
 
@@ -45,21 +26,38 @@ go to ebserver/src/testModule.js and change 'app_name' to the desired app
     android/app/src/main/res/xml/network_security_config.xml include ebserver ip
 
 ## 3 Connecting Device
-    Enable usb debugging on the device
-    Connect the device to the development machine via usb cable
-    The following commands should be done in the terminal:
-    Type 'adb tcpip 5555'
-    Type 'adb shell ip addr show wlan0' to find the ip address of the mobile device
-    Type 'adb connect MOBILE_IP_ADDRESS'
-    Unconnect the usb cable.
+    enable usb debugging on the device
+    connect the device to the development machine via usb cable
+    the following commands should be done in the terminal:
+      adb tcpip 5555
+      adb shell ip addr show wlan0 -> to find the ip address of the mobile device
+      adb connect MOBILE_IP_ADDRESS
+    unconnect the usb cable.
 
 ## 4 Starting Ebserver
     in the terminal, go to ebserver/src and type 'node ebserver.js'
-    on the device, start the desired application
+    on the device, start the application
 
 ## 5 Advanced Configuring Ebserver
-    go to ebserver/src/configurationsFolder and open defaultConfiguration.js
-    edit exampleConfig so it better reflects the experiments that are running
-    update module.exports experiments to reflect the previous changes
-    if desired, change the number of experiments to be run on "start_execution" and "end_execution"
+    go to ebserver/src/configurationsFolder and open default.json
+    change the default.json to better reflect the experiment being executed
     go back to the application source code and update it
+
+# UI Executions mode
+
+## 1 Configuring Applications
+    find the development machine ip address.
+
+## 2 Connecting Device
+    enable usb debugging on the device
+    connect the device to the development machine via usb cable
+    the following commands should be done in the terminal:
+      adb tcpip 5555
+      adb shell ip addr show wlan0 -> to find the ip address of the mobile device
+      adb connect MOBILE_IP_ADDRESS
+    unconnect the usb cable.
+
+## 3 Starting Ebserver
+go to ebserver/src/testModule.js and change 'app_name' to the desired app
+  in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
+  where TEST_CLASS it's the class to be executed, PACKAGE the full package name of that class, and METHOD the name of the method, and SUFIX is the sufix to be applied to the package name
