@@ -15,15 +15,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        try {
-            Repository repository = new Repository();
-            String execution = repository.started();
-            startProgram(execution);
-            repository.logData();
-            repository.done();
-        } catch (Exception e) {
-            Log.e("error", e.getMessage());
-        }
+        new Thread(() -> {
+            try {
+                Repository repository = new Repository();
+                String execution = repository.started();
+                startProgram(execution);
+                repository.logData();
+                repository.done();
+            } catch (Exception e) {
+                Log.e("error", e.getMessage());
+            }
+        }).start();
     }
 
     void startProgram(String response) throws InterruptedException {
