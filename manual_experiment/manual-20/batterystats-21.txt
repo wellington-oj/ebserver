@@ -1,0 +1,594 @@
+Battery History (0% used, 244 used of 4096KB, 5 strings using 210):
+                    0 (14) RESET:TIME: 2023-02-10-14-37-58
+                    0 (1) 089 status=not-charging health=good plug=none temp=297 volt=4233 charge=4005 modemRailChargemAh=0 wifiRailChargemAh=0 +running +wake_lock +wifi_radio +screen phone_signal_strength=great brightness=medium +wifi wifi_signal_strength=3 wifi_suppl=completed +ble_scan
+                    0 (2) 089 fg=u0a189:"com.magiear.handsfree.assistant"
+                    0 (2) 089 top=u0a241:"com.android.starter"
+                    0 (2) 089 user=0:"0"
+                    0 (2) 089 userfg=0:"0"
+                 +3ms (2) 089 stats=0:"wakelock-change"
+                +32ms (2) 089 stats=0:"dump"
+             +8s676ms (2) 089 stats=0:"dump"
+
+Per-PID Stats:
+  PID 1410 wake time: +2ms
+  PID 4835 wake time: +51ms
+  PID 4835 wake time: +74ms
+  PID 1410 wake time: +3m36s325ms
+
+Daily stats:
+  Current start time: 2023-02-10-11-33-17
+  Next min deadline: 2023-02-11-01-00-00
+  Next max deadline: 2023-02-11-03-00-00
+  Current daily discharge step durations:
+    #0: +5m59s931ms to 89 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #1: +8m18s139ms to 90 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #2: +11m12s797ms to 91 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #3: +4m36s235ms to 92 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #4: +3m23s11ms to 93 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #5: +3m43s992ms to 94 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #6: +7m0s848ms to 95 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #7: +8m21s776ms to 96 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #8: +8m44s270ms to 97 (screen-on, power-save-off, device-idle-off, network-wifi)
+    #9: +3m7s693ms to 98 (screen-on, power-save-off, device-idle-off, network-wifi)
+      Discharge total time: 10h 44m 46s 900ms  (from 10 steps)
+      Discharge screen on time: 10h 44m 46s 900ms  (from 10 steps)
+    Package changes:
+      Update android.autoinstalls.config.oneplus vers=1001
+      Update android.autoinstalls.config.oneplus vers=1001
+      Update com.google.android.apps.chromecast.app vers=26301127
+      Update com.google.android.apps.chromecast.app vers=26301127
+      Update com.google.android.apps.magazines vers=2022113898
+      Update com.google.android.apps.magazines vers=2022113898
+      Update com.android.vending vers=83431810
+      Update com.android.vending vers=83431810
+      Update com.google.android.apps.podcasts vers=100003105
+      Update com.google.android.apps.podcasts vers=100003105
+      Update com.google.android.apps.subscriptions.red vers=326975
+      Update com.google.android.apps.subscriptions.red vers=326975
+      Update com.google.android.gms vers=230413039
+      Update com.google.android.gms vers=230413039
+      Update com.google.android.contacts vers=2960686
+      Update com.google.android.contacts vers=2960686
+      Update com.google.android.accessibility.soundamplifier vers=187412
+      Update com.google.android.accessibility.soundamplifier vers=187412
+      Update com.google.android.gm vers=63675156
+      Update com.google.android.gm vers=63675156
+      Update com.google.android.inputmethod.latin vers=99078522
+      Update com.google.android.inputmethod.latin vers=99078522
+      Update com.google.android.calendar vers=2017156032
+      Update com.google.android.calendar vers=2017156032
+      Update com.google.android.apps.wellbeing vers=471337
+      Update com.google.android.apps.wellbeing vers=471337
+      Update com.google.ar.core vers=223110483
+      Update com.google.ar.core vers=223110483
+      Update com.google.android.tts vers=210403525
+      Update com.google.android.tts vers=210403525
+      Update com.google.android.apps.photos vers=46865477
+      Update com.google.android.apps.photos vers=46865477
+      Update com.google.android.ims vers=31090327
+      Update com.google.android.ims vers=31090327
+      Update com.google.android.apps.googleassistant vers=52
+      Update com.google.android.apps.googleassistant vers=52
+      Update com.google.android.webview vers=541411734
+      Update com.google.android.webview vers=541411734
+      Update com.google.android.marvin.talkback vers=60129523
+      Update com.google.android.marvin.talkback vers=60129523
+      Update com.google.android.projection.gearhead vers=88630424
+      Update com.google.android.projection.gearhead vers=88630424
+      Update com.google.android.dialer vers=10836728
+      Update com.google.android.dialer vers=10836728
+      Update com.google.android.keep vers=220506871
+      Update com.google.android.keep vers=220506871
+      Update com.google.android.apps.maps vers=1066880880
+      Update com.google.android.apps.maps vers=1066880880
+      Update com.google.android.apps.messaging vers=169759063
+      Update com.google.android.apps.messaging vers=169759063
+      Update com.google.android.googlequicksearchbox vers=301224767
+      Update com.google.android.googlequicksearchbox vers=301224767
+      Update com.google.ar.lens vers=220323019
+      Update com.google.ar.lens vers=220323019
+      Update com.google.android.apps.nbu.files vers=394675
+      Update com.google.android.apps.nbu.files vers=394675
+      Update com.android.chrome vers=541411734
+      Update com.android.chrome vers=541411734
+      Update com.google.android.youtube vers=1535892928
+      Update com.google.android.youtube vers=1535892928
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+      Update com.android.starter vers=1
+
+Statistics since last charge:
+  System starts: 0, currently on battery: true
+  Estimated battery capacity: 4500 mAh
+  Min learned battery capacity: 4246 mAh
+  Max learned battery capacity: 4246 mAh
+  Time on battery: 8s 752ms (100.0%) realtime, 8s 752ms (100.0%) uptime
+  Time on battery screen off: 0ms (0.0%) realtime, 0ms (0.0%) uptime
+  Time on battery screen doze: 0ms (0.0%)
+  Total run time: 8s 752ms realtime, 8s 752ms uptime
+  Discharge: 0 mAh
+  Screen off discharge: 0 mAh
+  Screen doze discharge: 0 mAh
+  Screen on discharge: 0 mAh
+  Device light doze discharge: 0 mAh
+  Device deep doze discharge: 0 mAh
+  Start clock time: 2023-02-10-14-37-58
+  Screen on: 8s 752ms (100.0%) 0x, Interactive: 8s 752ms (100.0%)
+  Screen brightnesses:
+    medium 8s 752ms (100.0%)
+
+  CONNECTIVITY POWER SUMMARY START
+  Logging duration for connectivity statistics: 8s 752ms 
+  Cellular Statistics:
+     Cellular kernel active time: 0ms (0.0%)
+     Cellular Sleep time:  9s 193ms (105.0%)
+     Cellular Idle time:   347ms (4.0%)
+     Cellular Rx time:     44ms (0.5%)
+     Cellular Tx time:     
+       less than 0dBm:  0ms (0.0%)
+       0dBm to 8dBm:  0ms (0.0%)
+       8dBm to 15dBm:  0ms (0.0%)
+       15dBm to 20dBm:  0ms (0.0%)
+       above 20dBm:  0ms (0.0%)
+     Cellular Battery drain: 0.00102mAh
+     Cellular data received: 0B
+     Cellular data sent: 0B
+     Cellular packets received: 0
+     Cellular packets sent: 0
+     Cellular Radio Access Technology: (no activity)
+     Cellular Rx signal strength (RSRP):
+       great (greater than -98dBm):  8s 752ms (100.0%) 
+  Wifi Statistics:
+     Wifi kernel active time: 8s 752ms (100.0%)
+     WiFi Scan time:  0ms (0.0%)
+     WiFi Sleep time:  8s 754ms (100.0%)
+     WiFi Idle time:   0ms (0.0%)
+     WiFi Rx time:     0ms (0.0%)
+     WiFi Tx time:     0ms (0.0%)
+     Wifi data received: 0B
+     Wifi data sent: 0B
+     Wifi packets received: 0
+     Wifi packets sent: 0
+     Wifi states:
+       sta 8s 752ms (100.0%) 
+     Wifi supplicant states:
+       completed 8s 752ms (100.0%) 
+     Wifi Rx signal strength (RSSI):
+         good (-66.25dBm to -55dBm): 8s 752ms (100.0%) 
+  GPS Statistics:
+     GPS signal quality (Top 4 Average CN0):
+      poor (less than 20 dBHz): 0ms (0.0%) 
+      good (greater than 20 dBHz): 0ms (0.0%) 
+  CONNECTIVITY POWER SUMMARY END
+
+  Bluetooth total received: 0B, sent: 0B
+  Bluetooth scan time: 8s 752ms 
+     Bluetooth Idle time:   0ms (0.0%)
+     Bluetooth Rx time:     0ms (0.0%)
+     Bluetooth Tx time:     0ms (0.0%)
+
+  Device battery use since last full charge
+    Amount discharged (lower bound): 0
+    Amount discharged (upper bound): 0
+    Amount discharged while screen on: 0
+    Amount discharged while screen off: 0
+    Amount discharged while screen doze: 0
+
+  Estimated power use (mAh):
+    Capacity: 4500, Computed drain: 0.926, actual drain: 0
+    Screen: 0.523 Excluded from smearing
+    Uid u0a241: 0.285 ( cpu=0.285 ) Including smearing: 0.314 ( proportional=0.0292 )
+    Uid 1000: 0.0425 ( cpu=0.0425 sensor=0.0000122 ) Excluded from smearing
+    Idle: 0.0224 Excluded from smearing
+    Uid 2000: 0.0222 ( cpu=0.0222 ) Excluded from smearing
+    Uid 0: 0.0117 ( cpu=0.0117 ) Excluded from smearing
+    Uid u0a120: 0.00385 ( cpu=0.00385 ) Excluded from smearing
+    Uid u0a115: 0.00323 ( cpu=0.00323 ) Including smearing: 0.00356 ( proportional=0.000331 )
+    Cell standby: 0.00243 ( radio=0.00243 ) Excluded from smearing
+    Uid u0a233: 0.00175 ( cpu=0.00175 ) Including smearing: 0.00193 ( proportional=0.000179 )
+    Uid 1036: 0.00161 ( cpu=0.00161 ) Excluded from smearing
+    Uid u0a138: 0.00154 ( cpu=0.00154 ) Including smearing: 0.00170 ( proportional=0.000158 )
+    Uid u0a167: 0.00149 ( cpu=0.00149 ) Including smearing: 0.00164 ( proportional=0.000153 )
+    Uid 1069: 0.000775 ( cpu=0.000775 ) Excluded from smearing
+    Uid u0a80: 0.000517 ( cpu=0.000517 ) Including smearing: 0.000570 ( proportional=0.0000530 )
+    Uid 1001: 0.000439 ( cpu=0.000439 ) Excluded from smearing
+    Uid u0a109: 0.000427 ( cpu=0.000425 sensor=0.00000243 ) Including smearing: 0.000471 ( proportional=0.0000438 )
+    Uid 1066: 0.000258 ( cpu=0.000258 ) Excluded from smearing
+    Uid u0a146: 0.000258 ( cpu=0.000258 ) Including smearing: 0.000285 ( proportional=0.0000265 )
+    Uid u0a221: 0.000219 ( cpu=0.000219 ) Including smearing: 0.000242 ( proportional=0.0000225 )
+    Uid u0a181: 0.000172 ( cpu=0.000172 ) Including smearing: 0.000190 ( proportional=0.0000177 )
+    Uid 1027: 0.000167 ( cpu=0.000167 ) Excluded from smearing
+    Uid 1041: 0.0000861 ( cpu=0.0000861 ) Excluded from smearing
+    Uid u0a211: 0.0000861 ( cpu=0.0000861 ) Including smearing: 0.0000949 ( proportional=0.00000883 )
+    Uid u0a212: 0.0000861 ( cpu=0.0000861 ) Including smearing: 0.0000949 ( proportional=0.00000883 )
+
+  CPU freqs: 500000 650000 740000 900000 980000 1053000 1150000 1260000 1310000 1407000 1503000 1600000 1703000 1800000 1903000 2000000 650000 740000 910000 1040000 1140000 1300000 1430000 1540000 1660000 1800000 1900000 2000000 2150000 2240000 2320000 2400000
+
+  0:
+    Total cpu time: u=25ms s=883ms 
+    Total cpu time per freq: 190 0 0 10 10 0 20 0 30 0 10 0 10 0 40 340 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc kworker/u17:3:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc kworker/u17:2:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc kworker/u16:3:
+      CPU: 0ms usr + 70ms krn ; 0ms fg
+    Proc kworker/u16:2:
+      CPU: 0ms usr + 70ms krn ; 0ms fg
+    Proc kworker/u16:1:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc kworker/u16:0:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc irq/274-wlan%d:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc migration/7:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc migration/2:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc migration/1:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc migration/0:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc ksoftirqd/4:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc ksoftirqd/2:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc ksoftirqd/1:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc ksoftirqd/0:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc ion_mm_heap_for:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc zygote64:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc chre_kthread:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc mtk_drm_disp_id:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc rx_thread:
+      CPU: 0ms usr + 60ms krn ; 0ms fg
+    Proc kworker/7:0:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc kworker/2:3:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc kworker/1:2:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc rcu_sched:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc rcu_preempt:
+      CPU: 0ms usr + 30ms krn ; 0ms fg
+    Proc init:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc ueventd:
+      CPU: 20ms usr + 0ms krn ; 0ms fg
+    Proc hif_thread:
+      CPU: 0ms usr + 270ms krn ; 0ms fg
+    Proc main_thread:
+      CPU: 0ms usr + 280ms krn ; 0ms fg
+    Proc krtatm:
+      CPU: 0ms usr + 50ms krn ; 0ms fg
+    Proc tbatt_pwroff:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc ipi_cpu_dvfs_rt:
+      CPU: 0ms usr + 50ms krn ; 0ms fg
+    Proc conninfra_cored:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+  1000:
+    Wake lock *alarm* realtime
+    Wake lock *telephony-radio* realtime
+    Sensor 27: 8s 752ms realtime (0 times)
+    Sensor 1001: 8s 752ms realtime (0 times)
+    Sensor 16777298: 8s 752ms realtime (0 times)
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=1s 329ms s=1s 867ms 
+    Total cpu time per freq: 1660 0 0 10 0 0 30 20 50 0 0 20 30 50 80 600 450 0 0 0 0 0 0 0 0 0 0 0 0 0 10 20
+    Proc android.hardware.memtrack@1.0-service:
+      CPU: 20ms usr + 60ms krn ; 0ms fg
+    Proc com.oplus.athena:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc com.oplus.securitypermission:
+      CPU: 10ms usr + 10ms krn ; 0ms fg
+    Proc vendor.oplus.hardware.displaypanelfeature@1.0-service:
+      CPU: 30ms usr + 20ms krn ; 0ms fg
+    Proc com.heytap.mcs:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc com.oplus.persist.system:
+      CPU: 80ms usr + 20ms krn ; 0ms fg
+    Proc android.system.suspend@1.0-service:
+      CPU: 10ms usr + 30ms krn ; 0ms fg
+    Proc com.oplus.appplatform:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+    Proc android.hardware.graphics.composer@2.1-service:
+      CPU: 70ms usr + 80ms krn ; 0ms fg
+    Proc horae:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc android.hardware.sensors@2.0-service.multihal-mediatek:
+      CPU: 10ms usr + 20ms krn ; 0ms fg
+    Proc surfaceflinger:
+      CPU: 250ms usr + 160ms krn ; 0ms fg
+    Proc vendor.oplus.hardware.performance@1.0-service:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc system:
+      CPU: 900ms usr + 1s 580ms krn ; 0ms fg
+    Proc android.hardware.health@2.1-service:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc oiface:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc com.oplus.persist.multimedia:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+    Proc android.hardware.graphics.allocator@4.0-service-mediatek:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+    Proc vendor.mediatek.hardware.mtkpower@1.0-service:
+      CPU: 0ms usr + 20ms krn ; 0ms fg
+    Proc batterywarning:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+  1001:
+    Wake lock *telephony-radio* realtime
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=34ms s=15ms 
+    Total cpu time per freq: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc mtkfusionrild:
+      CPU: 10ms usr + 10ms krn ; 0ms fg
+    Proc com.android.phone:
+      CPU: 30ms usr + 20ms krn ; 0ms fg
+    Proc gsm0710muxd:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+  1002:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=1ms s=0ms 
+    Proc com.android.bluetooth:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+  1010:
+    Total cpu time: u=1ms s=5ms 
+    Proc wificond:
+      CPU: 10ms usr + 10ms krn ; 0ms fg
+  1017:
+    Total cpu time: u=0ms s=0ms 
+    (nothing executed)
+  1027:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=8ms s=3ms 
+    Total cpu time per freq: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.android.nfc:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+  1036:
+    Total cpu time: u=69ms s=82ms 
+    Total cpu time per freq: 60 0 0 0 0 0 0 0 0 0 0 0 0 0 10 40 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc logd:
+      CPU: 80ms usr + 110ms krn ; 0ms fg
+  1041:
+    Total cpu time: u=1ms s=1ms 
+    Total cpu time per freq: 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc audioserver:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+  1047:
+    Total cpu time: u=0ms s=0ms 
+    (nothing executed)
+  1058:
+    Total cpu time: u=0ms s=1ms 
+    (nothing executed)
+  1066:
+    Total cpu time: u=35ms s=7ms 
+    Total cpu time per freq: 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc statsd:
+      CPU: 40ms usr + 10ms krn ; 0ms fg
+  1068:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  1069:
+    Total cpu time: u=0ms s=84ms 
+    Total cpu time per freq: 90 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc lmkd:
+      CPU: 0ms usr + 90ms krn ; 0ms fg
+  1072:
+    Total cpu time: u=0ms s=0ms 
+    (nothing executed)
+  1073:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  2000:
+    Total cpu time: u=349ms s=631ms 
+    Total cpu time per freq: 130 0 0 10 30 0 30 0 50 20 30 20 100 0 20 310 130 0 0 0 0 0 0 0 0 0 0 0 10 0 0 80
+    Proc adbd:
+      CPU: 70ms usr + 310ms krn ; 0ms fg
+    Proc logcat:
+      CPU: 20ms usr + 40ms krn ; 0ms fg
+  u0a75:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a80:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=53ms s=8ms 
+    Total cpu time per freq: 60 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.google.android.documentsui:
+      CPU: 50ms usr + 20ms krn ; 0ms fg
+  u0a82:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a109:
+    Sensor 16777300: 8s 752ms realtime (0 times)
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=45ms s=3ms 
+    Total cpu time per freq: 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.oplus.deepthinker:
+      CPU: 40ms usr + 0ms krn ; 0ms fg
+  u0a112:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=0ms 
+  u0a115:
+    Top for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=198ms s=43ms 
+    Total cpu time per freq: 120 0 0 0 0 0 30 0 0 0 0 0 0 0 0 60 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc net.oneplus.launcher:
+      CPU: 210ms usr + 40ms krn ; 0ms fg
+  u0a120:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=141ms s=69ms 
+    Total cpu time per freq: 90 0 0 0 0 0 0 0 0 0 0 0 10 0 30 20 60 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10
+    Proc com.android.systemui:
+      CPU: 140ms usr + 70ms krn ; 0ms fg
+  u0a128:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=1ms 
+  u0a129:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a137:
+    Background for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a138:
+    Bluetooth Scan (total actual realtime): 8s 752ms  (0 times) (currently running)
+    Bluetooth Scan Results: 0 (0 in background)
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=74ms s=28ms 
+    Total cpu time per freq: 60 0 0 0 0 0 20 0 0 0 0 0 0 0 0 20 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.google.android.gms:
+      CPU: 50ms usr + 20ms krn ; 0ms fg
+    Proc com.google.android.gms.persistent:
+      CPU: 30ms usr + 10ms krn ; 0ms fg
+    Apk com.google.android.gms:
+      Service com.google.android.gms.ads.identifier.service.AdvertisingIdService:
+        Created for: 0ms uptime
+        Starts: 0, launches: 1
+  u0a140:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a144:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a145:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a146:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=19ms s=10ms 
+    Total cpu time per freq: 30 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.google.android.googlequicksearchbox:search:
+      CPU: 10ms usr + 20ms krn ; 0ms fg
+  u0a157:
+    Background for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=1ms s=2ms 
+  u0a158:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=2ms 
+  u0a167:
+    Foreground for: 524ms 
+    Cached for: 8s 228ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=62ms s=11ms 
+    Total cpu time per freq: 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 60 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.nearme.statistics.rom:
+      CPU: 150ms usr + 20ms krn ; 0ms fg
+  u0a169:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=0ms 
+  u0a172:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=0ms 
+  u0a176:
+    Background for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a181:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=9ms s=8ms 
+    Total cpu time per freq: 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.oplus.cosa:
+      CPU: 10ms usr + 10ms krn ; 0ms fg
+  u0a188:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a189:
+    Foreground services: 8s 752ms realtime (0 times) (running)
+    Fg Service for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a191:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a194:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=5ms s=1ms 
+  u0a195:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a196:
+    Background for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=1ms s=0ms 
+    Proc com.google.android.ims:
+      CPU: 10ms usr + 0ms krn ; 0ms fg
+  u0a205:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a207:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=0ms s=1ms 
+  u0a211:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=4ms s=2ms 
+    Total cpu time per freq: 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  u0a212:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=1ms s=5ms 
+    Total cpu time per freq: 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc com.google.android.providers.media.module:
+      CPU: 0ms usr + 10ms krn ; 0ms fg
+  u0a213:
+    Foreground for: 8s 752ms 
+    Total running: 8s 752ms 
+  u0a221:
+    Cached for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=5ms s=1ms 
+    Total cpu time per freq: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  u0a233:
+    Foreground for: 545ms 
+    Cached for: 8s 207ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=82ms s=1ms 
+    Total cpu time per freq: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 70 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    Proc net.oneplus.weather:
+      CPU: 170ms usr + 0ms krn ; 0ms fg
+  u0a241:
+    Wake lock *launch* realtime
+    Foreground activities: 8s 752ms realtime (0 times) (running)
+    Top for: 8s 752ms 
+    Total running: 8s 752ms 
+    Total cpu time: u=11s 762ms s=3s 516ms 
+    Total cpu time per freq: 230 0 0 0 20 0 0 0 20 0 0 0 0 0 20 450 13970 0 10 30 0 40 0 20 30 60 0 0 10 0 20 380
+    Proc com.android.starter:
+      CPU: 11s 460ms usr + 3s 480ms krn ; 0ms fg
+
+Total cpu time reads: 0
+Batched cpu time reads: 0
+Batching Duration (min): 184
+All UID cpu time reads since the later of device start or stats reset: 16
+UIDs removed since the later of device start or stats reset: 0
