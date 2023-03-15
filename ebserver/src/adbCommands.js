@@ -46,9 +46,10 @@ async function outputBatteryStatsTest(framework, currentTest, counter, packageNa
     outputBatteryStatsTo("",framework,currentTest,counter,packageName);
 }
 
-async function startApp(targetDevice, applicationId, mainActivity) {
+async function startApp(targetDevice, applicationId, mainActivity, startParameter) {
+    const parameter = !startParameter || startParameter.length === 0 ? "" : ` -e ip ${startParameter}`
     try {
-        await exec("adb" + getTarget(targetDevice) + "shell am start -n " + applicationId + "/" + mainActivity)
+        await exec("adb" + getTarget(targetDevice) + "shell am start -n " + applicationId + "/" + mainActivity + parameter)
     } catch (error) {
         console.log(`ERROR STARTING APP ${targetDevice}`)
     }
@@ -70,9 +71,9 @@ async function killApp(targetDevice, applicationId) {
     }
 }
 
-async function done(targetDevice, applicationId, mainActivity) {
+async function done(targetDevice, applicationId, mainActivity, parameter) {
     await killApp(targetDevice, applicationId)
-    await startApp(targetDevice, applicationId, mainActivity)
+    await startApp(targetDevice, applicationId, mainActivity, parameter)
 }
 
 
