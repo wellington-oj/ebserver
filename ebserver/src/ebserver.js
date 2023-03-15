@@ -3,6 +3,7 @@ const cors = require('cors');
 const session = require("./session")
 const adb = require("./adbCommands")
 const test = require("./testModule")
+const { networkInterfaces } = require('os');
 
 const app = express()
 app.use(cors())
@@ -68,8 +69,24 @@ async function done(ip, device, test_type, application_id, activity) {
     await adb.done(
         ip,
         application_id,
-        activity
+        activity,
+        getServerIpFromSameNetworkAs(ip)
     )
+}
+
+function getServerIpFromSameNetworkAs(ipReference) {
+    const nets = networkInterfaces()
+    const referencePreffix = ipReference.substring(0, ipReference.lastIndexOf("."))
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
+            if (net.family === familyV4Value && !net.internal) {
+                if (referencePreffix == net.address.substring(0, net.address.lastIndexOf("."))) {
+                    return net.address
+                }
+            }
+        }
+    }
 }
 
 app.get("/", (req, res) => {
