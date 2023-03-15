@@ -25,7 +25,7 @@ function loadConfigs(){
     configurations.forEach((configuration) => {
         const raw = fs.readFileSync("src/configurationsFolder/" + configuration)
         const config = JSON.parse(raw)
-        addConfig(config, configuration.substring(0, configuration.length-5))
+        addConfig(config, configuration.split(".json")[0])
     })
 }
 
