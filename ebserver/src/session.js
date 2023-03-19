@@ -13,7 +13,7 @@ function addSession(device, currentTest, testNumber, config, test_type) {
 
 function getCurrentSession(device, test_type) {
     try {
-        if (sessions[device]["test_type"] != test_type) {
+        if (sessions[device]["test_type"] !== test_type) {
             throw "needs to create another session"
         }
     } catch (error) {
@@ -34,7 +34,7 @@ function getCurrentExecution(device, test_type) {
     return [session.current_algoritm, session.current_execution]
 }
 
-function updateExecution(device, test_type) {
+function updateExecution(device, test_type, skip_experiment) {
     const session = sessions[device]
     if(session.current_execution < session.configuration.end_execution) {
         session.current_execution += 1
@@ -43,12 +43,28 @@ function updateExecution(device, test_type) {
         const execution_list = session.configuration.experiments[test_type]
         const algoritm_index = execution_list.indexOf(session.current_algoritm)
         if(algoritm_index < (execution_list.length - 1)) {
-            session.current_algoritm = execution_list[algoritm_index + 1]
+            if (skip_experiment) {
+                return updateAlgorithm(session, execution_list, algoritm_index)
+            } else {
+                session.current_algoritm = execution_list[algoritm_index + 1]
+            }
         } else {
             return false
         }
     }
     return true
+}
+
+function updateAlgorithm(session, execution_list, algoritm_index){
+    const algorithm = session.current_algoritm.split("-")[0]
+    for(let index = algoritm_index; index < execution_list.length; index++) {
+        const element = execution_list[index].split("-")[0]
+        if (element !== algorithm){
+            session.current_algoritm = execution_list[index]
+            return true
+        }
+    }
+    return false
 }
 
 module.exports = {
