@@ -34,7 +34,8 @@ async function what_now(ip, device, test_type, application_id, activity, timerOb
             device, 
             test_type, 
             application_id, 
-            activity
+            activity,
+            true
         )
     }, timeout_seconds * 1000);
     return execution
@@ -56,16 +57,21 @@ async function logdata(ip, device, test_type, framework, application_id) {
     )
 }
 
-async function done(ip, device, test_type, application_id, activity) {
+async function done(ip, device, test_type, application_id, activity, hasTimedOut) {
     const [execution, execution_number] = session.getCurrentExecution(
         device,
         test_type
     )
     console.log(` - done ${device} ${test_type}, ${execution}, ${execution_number}`)
-    session.updateExecution(
+    let new_session = session.updateExecution(
         device, 
-        test_type
+        test_type,
+        hasTimedOut
     )
+    if (!new_session) {
+        clearTimerObj(device)
+        return
+    }
     await adb.done(
         ip,
         application_id,
@@ -81,7 +87,7 @@ function getServerIpFromSameNetworkAs(ipReference) {
         for (const net of nets[name]) {
             const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
             if (net.family === familyV4Value && !net.internal) {
-                if (referencePreffix == net.address.substring(0, net.address.lastIndexOf("."))) {
+                if (referencePreffix === net.address.substring(0, net.address.lastIndexOf("."))) {
                     return net.address
                 }
             }
@@ -120,12 +126,13 @@ app.get("/logdata", async (req, res) => {
 
 app.get("/done", async (req, res) => {
     const ip = req.ip.substring(req.ip.lastIndexOf(":") + 1)
-    done(
-        ip, 
-        req.headers.device, 
-        req.headers.test_type, 
-        req.headers.application_id, 
-        req.headers.activity
+    await done(
+        ip,
+        req.headers.device,
+        req.headers.test_type,
+        req.headers.application_id,
+        req.headers.activity,
+        false
     )
     res.send("")
 })
@@ -138,7 +145,7 @@ readInput();
 
 async function readInput() {
     if(process.argv.length > 2){
-        test.runTests(process.argv);
+        await test.runTests(process.argv);
     }else{
         console.log(">> Running Individual Executions Mode")
     }
