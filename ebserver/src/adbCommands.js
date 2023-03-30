@@ -4,7 +4,7 @@ const exec = util.promisify(require("child_process").exec);
 
 async function runCommand(command, targetDevice, dir, fileName){
     try {
-       await exec(`adb ${getTarget(targetDevice)} shell dumpsys ${command.name} ${command.params}  >  ${dir}/${command.name}-${fileName}`)
+        await exec(`adb ${getTarget(targetDevice)} shell dumpsys ${command.name} ${command.params}  >  "${dir}/${command.name}-${fileName}"`)
     } catch (error) {
         console.log(`ERROR EXECUTING ` +command.name + ` ON ${targetDevice}`)
     }	
@@ -25,14 +25,14 @@ async function cleanBatteryStatus(targetDevice) {
 
 async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, counter, packageName) {
     const fileName = `${counter}.txt`
-    const device = await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")
+    const device = (await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")).stdout.trim()
     createDirIfNotExists(fs, 'experiment-results')
     createDirIfNotExists(fs, 'experiment-results/' + framework)
-    createDirIfNotExists(fs, 'experiment-results/' + framework + '/' + device.stdout.trim())
-    const dir = 'experiment-results/' + framework + '/' + '/' + device.stdout.trim() + '/' + currentTest
+    createDirIfNotExists(fs, 'experiment-results/' + framework + '/' + device)
+    const dir = 'experiment-results/' + framework + '/' + device + '/' + currentTest
     createDirIfNotExists(fs, dir)
     
-    const meminfo = {name: "meminfo", params: ` ${packageName}.test -d`}
+    const meminfo = {name: "meminfo", params: ` ${packageName} -d`}
     const batterystats = {name: "batterystats", params: ""}
     const procstats = {name: "procstats", params: ` --hours 1`}
     
@@ -43,7 +43,7 @@ async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, c
 }
 
 async function outputBatteryStatsTest(framework, currentTest, counter, packageName) {
-    outputBatteryStatsTo("",framework,currentTest,counter,packageName);
+    await outputBatteryStatsTo("",framework,currentTest,counter,packageName);
 }
 
 async function startApp(targetDevice, applicationId, mainActivity, startParameter) {
@@ -71,9 +71,11 @@ async function killApp(targetDevice, applicationId) {
     }
 }
 
-async function done(targetDevice, applicationId, mainActivity, parameter) {
+async function done(targetDevice, applicationId, mainActivity, parameter, restart) {
     await killApp(targetDevice, applicationId)
-    await startApp(targetDevice, applicationId, mainActivity, parameter)
+    if (restart) {
+        await startApp(targetDevice, applicationId, mainActivity, parameter)
+    }
 }
 
 
