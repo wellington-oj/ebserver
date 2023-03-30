@@ -62,7 +62,9 @@ async function done(ip, device, test_type, application_id, activity, hasTimedOut
         device,
         test_type
     )
-    console.log(` - done ${device} ${test_type}, ${execution}, ${execution_number}`)
+    if (!hasTimedOut) {
+        console.log(` - done ${device} ${test_type}, ${execution}, ${execution_number}`)
+    }
     let new_session = session.updateExecution(
         device, 
         test_type,
@@ -70,13 +72,13 @@ async function done(ip, device, test_type, application_id, activity, hasTimedOut
     )
     if (!new_session) {
         clearTimerObj(device)
-        return
     }
     await adb.done(
         ip,
         application_id,
         activity,
-        getServerIpFromSameNetworkAs(ip)
+        getServerIpFromSameNetworkAs(ip),
+        new_session
     )
 }
 
