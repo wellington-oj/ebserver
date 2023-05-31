@@ -3,7 +3,7 @@
 This document will present the steps necessary to setup Ebserver and run it on Individual Executions mode and UI Executions mode.
 The information setup for all four app examples will be presented below.
 
-### requires: adb and node.js
+### requires: adb, node.js, and express
 
 # Individual Executions mode
 
