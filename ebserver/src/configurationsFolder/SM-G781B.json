@@ -1,0 +1,30 @@
+{
+    "program-types": ["benchmarkGame", "imageRotation"],
+    "benchmarkGame": {
+        "experiments": ["fannkuch"],
+        "parameters": {
+            "binarytree": [21, 22],
+            "fannkuch": [ 12],
+            "fasta": [35000000, 180000000],
+            "knucleotide": [2500000, 40000000],
+            "nbody": [22500000, 405000000],
+            "pidigits": [13000, 19500],
+            "regex": [2500000, 10000000],
+            "revcomp": [5000000, 40000000],
+            "spectral": [6500, 29250],
+            "mandelbrot": [4500, 27000]
+        }
+    },
+    "imageRotation": {
+        "experiments": ["rotation"],
+        "parameters": {
+            "rotation": ["28-4", "112-8", "252-12", "448-16"]
+        }
+    },
+    "start_execution": 1,
+    "end_execution": 45
+}
+
+
+
+

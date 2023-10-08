@@ -1,3 +1,4 @@
+const { log } = require("console");
 const fs = require("fs");
 const util = require('util');
 const exec = util.promisify(require("child_process").exec);
@@ -23,6 +24,14 @@ async function cleanBatteryStatus(targetDevice) {
     }
 }
 
+async function resetGfxInfo(targetDevice, packageName) {
+    try {
+        await exec(`adb ${getTarget(targetDevice)} shell dumpsys gfxinfo ${packageName} reset`)
+    } catch(error) {
+        console.log(`ERROR RESETING GFX ${targetDevice} ${packageName}`)
+    }
+}
+
 async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, counter, packageName) {
     const fileName = `${counter}.txt`
     const device = (await exec("adb" + getTarget(targetDevice) + "shell getprop ro.product.model")).stdout.trim()
@@ -35,15 +44,17 @@ async function outputBatteryStatsTo(targetDevice = "", framework, currentTest, c
     const meminfo = {name: "meminfo", params: ` ${packageName} -d`}
     const batterystats = {name: "batterystats", params: ""}
     const procstats = {name: "procstats", params: ` --hours 1`}
+    const gfxInfo = {name: "gfxinfo", params: ` ${packageName}`}
     
     await runCommand(meminfo, targetDevice, dir, fileName)
     await runCommand(batterystats, targetDevice, dir, fileName)
     await runCommand(procstats, targetDevice, dir, fileName)
+    await runCommand(gfxInfo, targetDevice, dir, fileName)
 
 }
 
 async function outputBatteryStatsTest(framework, currentTest, counter, packageName) {
-    await outputBatteryStatsTo("",framework,currentTest,counter,packageName);
+    await outputBatteryStatsTo("", framework,currentTest,counter,packageName);
 }
 
 async function startApp(targetDevice, applicationId, mainActivity, startParameter) {
@@ -86,5 +97,5 @@ function createDirIfNotExists(fs, dir) {
 }
 
 module.exports = {
-    cleanBatteryStatus, outputBatteryStatsTo, outputBatteryStatsTest, done, startUITest
+    cleanBatteryStatus, resetGfxInfo, outputBatteryStatsTo, outputBatteryStatsTest, done, startUITest
 }

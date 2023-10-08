@@ -19,6 +19,7 @@ function clearTimerObj(device){
 
 async function what_now(ip, device, test_type, application_id, activity, timerObj) {
     await adb.cleanBatteryStatus(ip)
+    await adb.resetGfxInfo(ip, application_id)
     const [execution, execution_number] = session.getCurrentExecution(
         device,
         test_type

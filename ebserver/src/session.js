@@ -36,18 +36,18 @@ function getCurrentExecution(device, test_type) {
 
 function updateExecution(device, test_type, skip_experiment) {
     const session = sessions[device]
+    const execution_list = session.configuration.experiments[test_type]
+    const algoritm_index = execution_list.indexOf(session.current_algoritm)
+    if (skip_experiment) {
+        session.current_execution = 1
+        return updateAlgorithm(session, execution_list, algoritm_index)
+    }
     if(session.current_execution < session.configuration.end_execution) {
         session.current_execution += 1
     } else {
-        session.current_execution = session.configuration.start_execution
-        const execution_list = session.configuration.experiments[test_type]
-        const algoritm_index = execution_list.indexOf(session.current_algoritm)
+        session.current_execution = 1
         if(algoritm_index < (execution_list.length - 1)) {
-            if (skip_experiment) {
-                return updateAlgorithm(session, execution_list, algoritm_index)
-            } else {
-                session.current_algoritm = execution_list[algoritm_index + 1]
-            }
+            session.current_algoritm = execution_list[algoritm_index + 1]
         } else {
             return false
         }
