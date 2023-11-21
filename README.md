@@ -59,5 +59,10 @@ The information setup for all four app examples will be presented below.
 
 ## 3 Starting Ebserver
 go to ebserver/src/testModule.js and change 'app_name' to the desired app
-  in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
-  where TEST_CLASS it's the class to be executed, PACKAGE the full package name of that class, and METHOD the name of the method, and SUFIX is the sufix to be applied to the package name
+in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
+where TEST_CLASS is the class to be executed, PACKAGE the full package name of that class, METHOD the name of the method, and SUFIX is the suffix to be applied to the package name
+to run the expresso example in this repository, run:
+
+    node ebserver.js changeText_sameActivity ChangeTextBehaviorTest com.example.android.testing.espresso.BasicSample test
+
+  
