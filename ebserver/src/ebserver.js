@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require('cors');
 const session = require("./session")
 const adb = require("./adbCommands")
-const test = require("./testModule")
+const ui = require("./UIModule")
 
 const app = express()
 app.use(cors())
@@ -120,10 +120,17 @@ app.listen(3000, () => {
 readInput();
 
 async function readInput() {
-    if(process.argv.length > 2){
-        test.runTests(process.argv);
-    }else{
-        console.log(">> Running Individual Executions Mode")
+    ip = await adb.connectWifi();
+    if(ip == "error"){
+        return;
     }
+    if(process.argv[2] == "-ui"){
+        console.log(">> Running UI Mode");
+        ui.run(process.argv);
+    }
+    else{
+        console.log(">> Running Individual Executions Mode");
+    }
+    
 }
 

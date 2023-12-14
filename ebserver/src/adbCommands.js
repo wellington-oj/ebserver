@@ -10,6 +10,54 @@ async function runCommand(command, targetDevice, dir, fileName){
     }	
 }
 
+
+async function connectWifi() {
+    try {
+        // Check the number of connected devices
+        const deviceCmd = await exec('adb devices');
+        const strDev = deviceCmd.stdout.toString();
+        const numDevices = strDev.split('\n').length - 3;
+        
+        console.log(numDevices);
+        
+        if (numDevices > 1) {
+            console.error("More than one device connected. Make sure that there is only one device.");
+            return "error";
+        }
+        
+        const deviceIpRegex = /(\d+\.\d+\.\d+\.\d+)/;    
+        const deviceMatch = strDev.match(deviceIpRegex);
+
+        // Get WiFi IP address on the connected device
+        const ipCmd = await exec('adb shell ip addr show wlan0');
+        const ipRegex = /inet (\d+\.\d+\.\d+\.\d+)/;
+        const ipMatch = ipCmd.stdout.toString().match(ipRegex);
+
+        if (!ipMatch) {
+            console.error("Unable to extract WiFi IP address from the adb shell command output");
+            return "error";
+        }
+
+        const ip = ipMatch[1];
+	
+        // If not already connected, attempt to connect
+        if (!(deviceMatch && ipMatch)) {
+            console.log(`Device not connected via Wi-fi. Connecting to ${ip}. Remove the USB cable and run ebserver again.`);
+            await exec(`adb connect ${ip}`);
+            return "error"
+        } else {
+            console.log(`Connected to ${ip}`);
+        }
+
+        return ip;
+    } catch (error) {
+        console.error("Error running adb shell command:", error);
+        return "error";
+    }
+}
+
+
+
 function getTarget(targetDevice){
     return targetDevice  === "" ? " " : ` -s ${targetDevice} `
 }
@@ -83,5 +131,5 @@ function createDirIfNotExists(fs, dir) {
 }
 
 module.exports = {
-    cleanBatteryStatus, outputBatteryStatsTo, outputBatteryStatsTest, done, startUITest
+    cleanBatteryStatus, outputBatteryStatsTo, outputBatteryStatsTest, done, startUITest, connectWifi
 }
