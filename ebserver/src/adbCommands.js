@@ -1,6 +1,7 @@
 const fs = require("fs");
 const util = require('util');
 const exec = util.promisify(require("child_process").exec);
+const subprocess = require('subprocess');
 
 async function runCommand(command, targetDevice, dir, fileName){
     try {
@@ -106,6 +107,7 @@ async function startUITest(className, methodName, packageName, sufix) {
     try {
        await exec(`adb shell am instrument -w -e debug false -e class ${packageName}.${className}#${methodName} ${packageName}.${sufix}/androidx.test.runner.AndroidJUnitRunner`)
     } catch (error) {
+        console.log(error)
         console.log(`ERROR STARTING APP`)
     }
 }
