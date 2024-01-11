@@ -1,7 +1,6 @@
 const fs = require("fs");
 const util = require('util');
 const exec = util.promisify(require("child_process").exec);
-const subprocess = require('subprocess');
 
 async function runCommand(command, targetDevice, dir, fileName){
     try {
