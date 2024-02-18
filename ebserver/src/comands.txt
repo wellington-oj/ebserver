@@ -1,0 +1,12 @@
+Comando para iniciar o app:
+
+adb shell am start -a android.intent.action.VIEW -n com.android.androidappexp/.MainActivity -e ip 192.168.1.11
+
+
+packages:
+
+Android-bench: com.android.starter
+android-exp  : com.android.androidappexp
+
+flutter-bench: com.example.starter
+flutter-exp  : com.flutter.appexp.flutter_app_exp

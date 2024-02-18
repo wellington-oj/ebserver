@@ -1,10 +1,10 @@
 {
     "program-types": ["benchmarkGame", "imageRotation"],
     "benchmarkGame": {
-        "experiments": ["fannkuch"],
+        "experiments": ["fannkuch", "knucleotide", "nbody", "pidigits", "regex", "revcomp", "spectral", "fasta", "binarytree", "mandelbrot"],
         "parameters": {
             "binarytree": [21, 22],
-            "fannkuch": [ 12],
+            "fannkuch": [11, 12],
             "fasta": [35000000, 180000000],
             "knucleotide": [2500000, 40000000],
             "nbody": [22500000, 405000000],

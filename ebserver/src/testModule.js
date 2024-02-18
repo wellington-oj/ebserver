@@ -7,7 +7,7 @@ async function runTests(args){
     const app_name = 'JAVA'
     
     if(args.length > 2 && args.length < 6){
-        console.log("To execute the dashboard using tests inform in order:" 
+        console.log("To execute Ebserver using tests inform in order:" 
         +"\n(1) the method to be executed"
         +"\n(2) the test class"
         +"\n(3) the package name"

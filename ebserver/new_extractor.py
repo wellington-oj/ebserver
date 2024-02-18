@@ -18,60 +18,71 @@ def readExperimentResult(exp_rel_path, executionNumber, readExecutionData, start
 # Memory file methods
 # values in MB
 def get_memory(filename):
-    with open(filename, 'r') as file:
-        for line in file:
-            if 'TOTAL' in line:
-                tokens = line.split()
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                if 'TOTAL' in line:
+                    tokens = line.split()
 
-                memory = float(tokens[1]) / 1000
-                heap_size, heap_alloc, heap_free = list(map(lambda x: float(x) / 1000, tokens[-3:]))
+                    memory = float(tokens[1]) / 1000
+                    heap_size, heap_alloc, heap_free = list(map(lambda x: float(x) / 1000, tokens[-3:]))
 
-                return memory, heap_free, heap_alloc, heap_size
+                    return memory, heap_free, heap_alloc, heap_size
+    except Exception as e:
+        print(f"Error on {filename}: {e}")    
     return [NaN] * 4
 
 # Data file methods
 # values in MB
 def get_data(filename, package):
-    with open(filename, 'r') as file:
-        for line in file:
-            if package not in line:
-                continue
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                if package not in line:
+                    continue
 
-            line = next(file)
+                line = next(file)
 
-            # if '(Cached)' in line or line.strip() == 'TOTAL: 100%' or '/' not in line:
-            if '(Cached)' in line or '/' not in line:
-                return None, None, None
+                # if '(Cached)' in line or line.strip() == 'TOTAL: 100%' or '/' not in line:
+                if '(Cached)' in line or '/' not in line:
+                    return None, None, None
 
-            # TOTAL: 100% (11MB-11MB-11MB/2,6MB-2,6MB-2,6MB/73MB-73MB-73MB over 1)
-            start_idx = line.find('(') + 1
-            end_idx = line.find('/', start_idx)
+                # TOTAL: 100% (11MB-11MB-11MB/2,6MB-2,6MB-2,6MB/73MB-73MB-73MB over 1)
+                start_idx = line.find('(') + 1
+                end_idx = line.find('/', start_idx)
 
-            # mem_data_low, mem_data_med, mem_data_high
-            # 11MB-11MB-11MB ==> [11.0, 11.0, 11.0]
-            return list(map(lambda x: float(x[:-2]), line[start_idx:end_idx].split('-')))
-
+                # mem_data_low, mem_data_med, mem_data_high
+                # 11MB-11MB-11MB ==> [11.0, 11.0, 11.0]
+                return list(map(lambda x: float(x[:-2]), line[start_idx:end_idx].split('-')))
+    except Exception as e:
+        print(f"Error on {filename}: {e}")
     return [NaN, NaN, NaN]
 
 
 # Energy file methods
 def get_voltage(filename):
     volt_keyword = 'volt='
-    with open(filename, 'r') as file:
-        for line in file:
-            if volt_keyword in line:
-                start = line.find(volt_keyword) + len(volt_keyword)
-                end = line.find(' ', start)
-                return float(line[start:end]) * 1e-3
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                if volt_keyword in line:
+                    start = line.find(volt_keyword) + len(volt_keyword)
+                    end = line.find(' ', start)
+                    return float(line[start:end]) * 1e-3
+    except Exception as e:
+        print(f"Error on {filename}: {e}")
     return NaN
 
 def get_appid(filename):
-    with open(filename, 'r') as file:
-        for line in file:
-            if "top=" in line:
-                start = line.find('=') + 1
-                end = line.find(':', start)
-                return line[start:end]
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                if "top=" in line:
+                    start = line.find('=') + 1
+                    end = line.find(':', start)
+                    return line[start:end]
+    except Exception as e:
+        print(f"Error on {filename}: {e}")
             
 def get_package(filename):
     with open(filename, 'r') as file:
@@ -95,27 +106,30 @@ def get_energy(filename, app_id, voltage):
 
 # values in seconds
 def get_time(filename, app_id):
-    found = 0
+    try:
+        found = 0
 
-    foreground_time, cpu_time = NaN, NaN
+        foreground_time, cpu_time = NaN, NaN
 
-    with open(filename, 'r') as file:
-        for line in file:
-            if found == 3:
-                return foreground_time, cpu_time
+        with open(filename, 'r') as file:
+            for line in file:
+                if found == 3:
+                    return foreground_time, cpu_time
 
-            if app_id in line and '=' not in line:
-                found = 1
-            elif 'Foreground activities:' in line and found:
-                time_str = substring(line, ':', 'r')
-                foreground_time = time_str2int(time_str)
-                found = 2
-            elif 'Total cpu time' in line and found:
-                time_str = substring(line, 'u=', 's=')
-                cpu_time = time_str2int(time_str)
-                found = 3
+                if app_id in line and '=' not in line:
+                    found = 1
+                elif 'Foreground activities:' in line and found:
+                    time_str = substring(line, ':', 'r')
+                    foreground_time = time_str2int(time_str)
+                    found = 2
+                elif 'Total cpu time' in line and found:
+                    time_str = substring(line, 'u=', 's=')
+                    cpu_time = time_str2int(time_str)
+                    found = 3
 
-    return [foreground_time, cpu_time]
+        return [foreground_time, cpu_time]
+    except Exception as e:
+        print(f"Error on {filename}: {e}")
 
 
 def substring(str, start_str, end_str):
