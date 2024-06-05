@@ -1,7 +1,7 @@
 {
     "app_name": "JAVA",
-    "method_name": "testFlashlightEnergyConsumption",
-    "class_name": "FlashlightTest",
+    "method_name": "changeText_newActivity",
+    "class_name": "ChangeTextBehaviorKtTest",
     "package_name": "com.example.android.testing.espresso.BasicSample",
     "suffix": "test",
     "exec_start": "1",
