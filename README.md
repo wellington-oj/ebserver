@@ -45,24 +45,28 @@ The information setup for all four app examples will be presented below.
 
 # UI Executions mode
 
-## 1 Configuring Applications
-    find the development machine ip address.
+### 1 Connecting Device
+    adb tcpip 5555
+### 2 Run ebserver 
+    node ebserver -ui
+- It will automatically find the ip and connect the development machine to the mobile device
 
-## 2 Connecting Device
-    enable usb debugging on the device
-    connect the device to the development machine via usb cable
-    the following commands should be done in the terminal:
-      adb tcpip 5555
-      adb shell ip addr show wlan0 -> to find the ip address of the mobile device
-      adb connect MOBILE_IP_ADDRESS
-    unconnect the usb cable.
 
-## 3 Starting Ebserver
-go to ebserver/src/testModule.js and change 'app_name' to the desired app
-in the terminal, go to ebserver/src and type 'node ebserver.js METHOD TEST_CLASS PACKAGE SUFIX'
-where TEST_CLASS is the class to be executed, PACKAGE the full package name of that class, METHOD the name of the method, and SUFIX is the suffix to be applied to the package name
-to run the expresso example in this repository, run:
+      Ebserver listening on port 3000!
+      Device not connected via Wi-fi. Connecting to 192.168.1.240. Remove the USB cable and run ebserver again.
+- Close ebserver
+- Remove the usb cable
 
-    node ebserver.js changeText_sameActivity ChangeTextBehaviorTest com.example.android.testing.espresso.BasicSample test
+### 3 Starting Ebserver
+- All configuration is done via json. You may find the json file at
+    
+
+      \ebserver\src\configUI\config.json
+    
+- Change the values on the json configuration file to the desired experiment
+- Run ebserver again (make sure to use the ```-ui``` tag)
+
+
+      node ebserver -ui
 
   
