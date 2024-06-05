@@ -5,7 +5,42 @@ The information setup for all four app examples will be presented below.
 
 ### requires: adb, node.js, and express
 
-# Individual Executions mode
+___
+UI Executions mode
+======
+Uses test suites (such as Espresso and UI Automator) to execute the experiments
+
+### 1 Connecting Device
+    adb tcpip 5555
+### 2 Run ebserver 
+    node ebserver -ui
+- It will automatically find the ip and connect the development machine to the mobile device
+
+
+      Ebserver listening on port 3000!
+      Device not connected via Wi-fi. Connecting to 192.168.1.240. Remove the USB cable and run ebserver again.
+- Close ebserver
+- Remove the usb cable
+
+### 3 Starting Ebserver
+- All configuration is done via json. You may find the json file at
+    
+
+      \ebserver\src\configUI\config.json
+    
+- Change the values on the json configuration file to the desired experiment
+- Run ebserver again (make sure to use the ```-ui``` tag)
+
+
+      node ebserver -ui
+
+  
+
+___
+Individual Executions mode
+======
+Uses instrumentation to execute the tests
+
 
 ## 1 Configuring Applications
     Find the development machine ip address.
@@ -43,30 +78,3 @@ The information setup for all four app examples will be presented below.
     change the default.json to better reflect the experiment being executed
     go back to the application source code and update it
 
-# UI Executions mode
-
-### 1 Connecting Device
-    adb tcpip 5555
-### 2 Run ebserver 
-    node ebserver -ui
-- It will automatically find the ip and connect the development machine to the mobile device
-
-
-      Ebserver listening on port 3000!
-      Device not connected via Wi-fi. Connecting to 192.168.1.240. Remove the USB cable and run ebserver again.
-- Close ebserver
-- Remove the usb cable
-
-### 3 Starting Ebserver
-- All configuration is done via json. You may find the json file at
-    
-
-      \ebserver\src\configUI\config.json
-    
-- Change the values on the json configuration file to the desired experiment
-- Run ebserver again (make sure to use the ```-ui``` tag)
-
-
-      node ebserver -ui
-
-  
